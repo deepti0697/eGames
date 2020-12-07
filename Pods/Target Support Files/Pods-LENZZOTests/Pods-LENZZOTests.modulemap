@@ -1,0 +1,6 @@
+framework module Pods_LENZZOTests {
+  umbrella header "Pods-LENZZOTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

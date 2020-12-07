@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-ck-VqV">
+                                <rect key="frame" x="0.0" y="-10" width="375" height="677"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-2X-i3R">
+                                        <rect key="frame" x="0.0" y="0.5" width="375" height="677"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.89999997615814209" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logowithoutLaunch.png" translatesAutoresizingMaskIntoConstraints="NO" id="fSp-59-ZjK">
+                                        <rect key="frame" x="0.0" y="203" width="375" height="158"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="158" id="aCA-1A-5Rz"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OLH-2X-i3R" firstAttribute="height" secondItem="HRq-ck-VqV" secondAttribute="height" id="8nK-Cd-AR9"/>
+                                    <constraint firstItem="fSp-59-ZjK" firstAttribute="centerX" secondItem="HRq-ck-VqV" secondAttribute="centerX" id="DHr-7j-uMe"/>
+                                    <constraint firstItem="OLH-2X-i3R" firstAttribute="width" secondItem="HRq-ck-VqV" secondAttribute="width" id="PKE-tX-81z"/>
+                                    <constraint firstItem="OLH-2X-i3R" firstAttribute="centerY" secondItem="HRq-ck-VqV" secondAttribute="centerY" constant="0.5" id="bAw-OE-pHN"/>
+                                    <constraint firstItem="OLH-2X-i3R" firstAttribute="centerX" secondItem="HRq-ck-VqV" secondAttribute="centerX" id="evb-Z0-r6z"/>
+                                    <constraint firstItem="fSp-59-ZjK" firstAttribute="centerY" secondItem="HRq-ck-VqV" secondAttribute="centerY" constant="-56.5" id="l27-tf-UlE"/>
+                                    <constraint firstItem="fSp-59-ZjK" firstAttribute="width" secondItem="HRq-ck-VqV" secondAttribute="width" id="oFF-QO-IiR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HRq-ck-VqV" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="LJ5-oD-DCf"/>
+                            <constraint firstItem="HRq-ck-VqV" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" constant="10" id="YSW-eI-MVT"/>
+                            <constraint firstItem="HRq-ck-VqV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-5" id="zdA-x4-eWz"/>
+                            <constraint firstItem="HRq-ck-VqV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zyg-GL-jGQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bg" width="414" height="736"/>
+        <image name="logowithoutLaunch.png" width="917" height="677"/>
+    </resources>
+</document>

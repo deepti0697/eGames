@@ -1,0 +1,421 @@
+/* 
+  Localizable.strings
+  Lenzzo
+
+  Created by Apple on 5/9/19.
+  Copyright © 2019 Lenzzo., Ltd. All rights reserved.
+*/
+
+
+"MSG1" = "Please enter name";
+"MSG2" = "Please enter email";
+"MSG3" = "Please enter mobile with correct format";
+"MSG4" = "Please enter password";
+"MSG5" = "Please enter confirm password";
+"MSG6" = "Please enter the e-mail in the correct format";
+"MSG7" = "Please make sure that you have at least a six-digit password";
+"MSG8" = "Password does not match with confirm password";
+"MSG10" = "Please enter old password";
+"MSG17" = "Please fill all details";
+"MSG18" = "OK";
+"MSG19" = "Loading...";
+"MSG20" = "Error";
+"MSG21" = "Failed";
+"MSG23" = "Failure";
+"MSG24" = "Success";
+"MSG31" = "ALERT";
+"MSG39" = "Please enter country code with + (example: +965)";
+"MSG40" = "Please wait...";
+"MSG43" = "No camera";
+"MSG44" = "Sorry, this device has no camera";
+"MSG45" = "Forgot Password?";
+"MSG46" = "Submit";
+
+"MSG86" = "Yes";
+"MSG87" = "No";
+"MSG88" = "Sent.";
+"MSG53" = "Cancel";
+"MSG100" = "Code Sent To Your Mobile";
+
+
+
+"MSG101" = "HOME";
+"MSG102" = "MY ACCOUNTS";
+"MSG103" = "MY ORDER";
+
+"MSG113" = "TERMS AND CONDITIONS";
+"MSG114" = "LOGOUT";
+
+
+"MSG115" = "FIRST NAME";
+"MSG116" = "LAST NAME";
+"MSG117" = "EMAIL ID";
+"MSG118" = "MOBILE";
+"MSG119" = "COUNTRY";
+"MSG120" = "GENDER";
+
+"MSG130" = "MY ACCOUNTS";
+
+
+"MSG132" = "Please enter city";
+"MSG133" = "Please enter country";
+
+
+"MSG134" = "Please enter name";
+"MSG135" = "Please enter quantity";
+"MSG136" = "Please enter message";
+"MSG137" = "Please select member type";
+
+
+"MSG145" = "Please enter first name";
+"MSG146" = "Please enter last name";
+"MSG147" = "Please enter country name";
+"MSG148" = "Please select gender";
+"MSG149" = "Please enter position";
+"MSG150" = "Please enter company name";
+"MSG151" = "Please enter subject name";
+"MSG152" = "Please enter comment";
+"MSG153" = "Please enter postal code";
+"MSG154" = "Please enter address";
+
+
+"MSG156" = "Add/Change Photo";
+"MSG157" = "Camera";
+"MSG158" = "Gallery";
+"MSG159" = "Please enter shop name";
+"MSG160" = "Please enter location";
+"MSG161" = "Please enter street name";
+"MSG162" = "Please select country";
+"MSG164" = "Please select city";
+"MSG165" = "Please enter pin code";
+"MSG166" = "Please enter user type";
+"MSG167" = "Please enter first name";
+"MSG168" = "Please enter last name";
+"MSG169" = "Please enter company name";
+
+"MSG170" = "Are you sure to remove product from bag?";
+"MSG185" = "Please enter your name";
+"MSG189" = "ORDER";
+"MSG190" = "Please select left eye power";
+"MSG191" = "Please select right eye power";
+
+
+
+
+"MSG192" = "You have been registered successfully and sent verification link on your email, Please verify your email.";
+
+"MSG193" = "Logged in successfully";
+
+"MSG194" = "BUY NOW";
+"MSG195" = "Out Of Stock";
+"MSG196" = "ADD TO BAG";
+"MSG197" = "Item added to your bag. Continue Shopping?";
+"MSG198" = "Continue";
+"MSG199" = "Go To Cart ";
+"MSG200" = "Please select left eye power";
+"MSG201" = "Please select right eye power";
+"MSG202" = "Please select shade";
+"MSG203" = "Please retry";
+"MSG204" = "Item deleted successfully";
+"MSG205" = "Item moved to wishlist";
+"MSG206" = "Are you sure to delete this item from bag?";
+"MSG207" = "Are you sure to move this item from bag to wishlist?";
+"MSG208" = "Please enter area name";
+"MSG209" = "Please select an address or add new address";
+"MSG210" = "Are you sure to delete this address?";
+"MSG211" = "UPDATE ADDRESS";
+"MSG212" = "SAVE ADDRESS";
+
+"MSG213" = "Please enter 8 digit mobile number";
+
+"MSG214" = "Filter Result";
+
+"MSG215" = "Rating";
+"MSG216" = "Search Result";
+
+"MSG217" = "Exclusive";
+"MSG218" = "Latest";
+"MSG219" = "Please enter 10 digit mobile number";
+"MSG220" = "Please enter block";
+"MSG221" = "Please enter street";
+"MSG222" = "Please enter house name";
+
+
+"MSG223" = "EXCLUSIVE";
+"MSG224" = "LATEST";
+"MSG225" = "new";
+"MSG226" = "Latest";
+"MSG227" = "Price: Low to High";
+"MSG228" = "Price: High to Low";
+"MSG229" = "Please select your language";
+"MSG230" = "Please select your country";
+
+"MSG231" = "Please select payment option";
+
+"MSG232" = "Content not available";
+"MSG233" = "Order Placed Sucessfully";
+"MSG234" = "Order History";
+"MSG235" = "Address added successfully";
+"MSG236" = "Address updated successfully";
+
+"MSG237" = "We were unable to process your payment. Please verify your payment method, payment method does not support this currency";
+"MSG238" = "WISHLIST";
+"MSG239" = "REMOVE WISHLIST";
+
+
+"MSG240" = "Location Permission";
+"MSG241" = "Please go to Settings and turn on the permissions";
+"MSG242" = "Settings";
+"MSG243" = "Sent successfully";
+
+"MSG244" = "Please enter PACI Number";
+
+"MSG245" = "Ends in:";
+"MSG246" = "COLLECTIONS";
+
+
+
+
+"MSG247" = "Please allow current premission";
+"MSG248" = "Offer Alert";
+"MSG249" = "● ";
+"MSG250" = "Eligible! Please choose your free item from below product to complete the order";
+
+
+"MSG251" = "Home";
+"MSG252" = "Wishlist";
+"MSG253" = "Deal Of The Day";
+"MSG254" = "My Account";
+"MSG255" = "Contact Us";
+"MSG256" = "LEFT EYE";
+"MSG257" = "RIGHT EYE";
+"MSG258" = "Left Eye Power: ";
+"MSG259" = "Right Eye Power: ";
+"MSG260" = "Out Of Stock";
+"MSG261" = "ORDER HISTORY";
+"MSG262" = "EDIT PROFILE";
+"MSG263" = "CHANGE PASSWORD";
+"MSG264" = "EMAIL: ";
+"MSG265" = "MOBILE: ";
+"MSG266" = "Profile updated successfully";
+
+"MSG267" = "Camera";
+"MSG268" = "Gallery";
+"MSG269" = "Change Photo";
+
+"MSG270" = "ADD REVIEW";
+"MSG271" = "Comments";
+
+"MSG272" = "SUBMIT";
+"MSG273" = "CLOSE";
+"MSG274" = "Reviews";
+
+"MSG275" = "Review";
+"MSG276" = "FEEDBACK";
+
+"MSG277" = "Please provide rating";
+
+"MSG278" = "Status: Failed";
+"MSG279" = "Status: Success";
+
+"MSG280" = "Order";
+"MSG281" = "Orders";
+
+
+"MSG282" = "Date:";
+"MSG283" = "Order Id:";
+"MSG284" = "Qty:";
+
+
+"MSG285" = "Payment Status: Failed";
+"MSG286" = "Payment Status: Pending";
+"MSG287" = "Payment Status: Success";
+
+"MSG288" = "Product Name:";
+"MSG289" = "Order id:";
+"MSG290" = "Price:";
+"MSG291" = "Discount:";
+"MSG292" = "Delivery Charges:";
+"MSG293" = "Quantity:";
+"MSG294" = "Free Quantity Included:";
+"MSG295" = "Grand Total:";
+"MSG296" = "Color:";
+"MSG297" = "Left Eye Power:";
+"MSG298" = "Right Eye Power:";
+"MSG299" = "Not available";
+"MSG300" = "Payment Mode:";
+"MSG301" = "Shipping Address:";
+"MSG302" = "Full name:";
+"MSG303" = "Area:";
+"MSG304" = "Block:";
+"MSG305" = "Street:";
+"MSG306" = "Avenue:";
+"MSG307" = "House/Building:";
+"MSG308" = "Floor Number:";
+"MSG309" = "Flat Number:";
+"MSG310" = "Phone Number:";
+"MSG311" = "PACI Number:";
+"MSG312" = "Comments:";
+"MSG313" = "Current Location:";
+"MSG314" = "Order Date:";
+
+"MSG315" = "Product out of stock";
+"MSG316" = "Your order not shipped yet";
+"MSG317" = "Password should be more than 5 digits";
+"MSG318" = "Please enter new password";
+"MSG319" = "Please enter confirm new password";
+"MSG320" = "New password does not match with confirm password";
+"MSG321" = "Password Changed Successfully";
+"MSG322" = "Your selected product is out of stock, Please remove product from your bag";
+
+"MSG323" = "Out of stock";
+"MSG324" = "Promo Code";
+"MSG325" = "Apply";
+"MSG326" = "Remove";
+"MSG327" = "Please enter Promo code";
+"MSG328" = "Promo code applied successfully!";
+"MSG329" = "SUB TOTAL";
+"MSG330" = "CART TOTAL";
+"MSG331" = "DISCOUNT OFFER";
+"MSG332" = "Promo Discount Price";
+"MSG333" = "Home";
+"MSG334" = "Country";
+"MSG335" = "Language";
+"MSG336" = "Categories";
+"MSG337" = "Terms & Conditions";
+"MSG338" = "About Us";
+"MSG339" = "FAQ’s";
+"MSG340" = "Rate Us";
+"MSG341" = "Sign Out";
+"MSG342" = "Hello,";
+
+"MSG343" = "LENZZO";
+"MSG344" = "DONE";
+
+"MSG345" = "My Wishlist";
+
+"MSG346" = "Already have an account?";
+"MSG347" = "Don't have an account!";
+"MSG348" = "TOTAL";
+"MSG349" = "ITEM ";
+
+"MSG350" = "إختر اللغة";
+"MSG351" = "الرجاء إختر البلد";
+"MSG352" = "Address auto fill click here";
+"MSG353" = "DELIVERY CHARGES";
+"MSG354" = "GRAND TOTAL";
+
+"MSG355" = "Order Status: Failed";
+"MSG356" = "Order Status: Success";
+"MSG357" = "View Details";
+
+
+"MSG358" = "APPLY";
+"MSG359" = "تطبيق";
+"MSG360" = "?";
+"MSG361" = "Male";
+"MSG362" = "Female";
+
+"MSG363" = "GENDER";
+"MSG364" = "DATE OF BIRTH";
+"MSG365" = "Please enter date of birth";
+"MSG366" = "Offer Name:";
+"MSG367" = "Promo Code:";
+"MSG368" = "LOYALTY POINTS";
+"MSG369" = "Available Loyalty Points";
+"MSG370" = "You need minimum %@ points for purchase products with points.";
+"MSG371" = "Loyalty Points";
+"MSG372" = "Available loyalty points are %@";
+"MSG373" = "You need to add more products to redeem points";
+
+"MSG374" = "Redeem";
+"MSG375" = "LOYALTY POINTS PRICE: ";
+"MSG376" = "%@ Loyalty Points will be added on successful purchase.";
+"MSG377" = "SHIPPING ADDRESS";
+
+"MSG378" = "Please enter house number or PACI number";
+"MSG379" = "Please enter floor number or PACI number";
+"MSG380" = "Please enter flat number or PACI number";
+
+"MSG381" = "Gift Name:";
+
+
+"MSG382" = "Please select your language";
+"MSG383" = "Please select your country";
+"MSG384" = "إختر اللغة";
+"MSG385" = "الرجاء إختر البلد";
+
+
+"MSG386" = "Your price sub total is 0.0";
+"MSG387" = "PAY NOW →";
+"MSG388" = "ORDER NOW →";
+"MSG389" = "Payment Status: FREE";
+"MSG390" = "Paid loyalty Points";
+"MSG391" = "Received loyalty Points";
+
+"MSG392" = "Redeemed Points";
+
+"MSG393" = "Get %@ Loyalty points after payment";
+"MSG394" = "You have %@ (%@ %@) Loyalty points";
+
+"MSG395" = "PENDING";
+"MSG396" = "FAILED";
+"MSG397" = "PROCESSING";
+"MSG398" = "COMPLETED";
+"MSG399" = "ON HOLD";
+"MSG400" = "CANCELLED";
+"MSG401" = "REFUNDED";
+"MSG402" = "STATUS";
+"MSG403" = "Order Status";
+
+
+"MSG404" = "Something went wrong";
+"MSG405" = "Product Code";
+"MSG406" = "Existing User";
+"MSG407" = "Guest User";
+"MSG408" = "You are not authorize to view as guest user.";
+"MSG409" = "You have been registered successfully";
+"MSG410" = "Select all";
+"MSG411" = "Deselect";
+"MSG412" = "Please select brand";
+"MSG413" = "Brand not available";
+"MSG414" = "Loyalty points for registered customers only";
+"MSG415" = "CONTINUE AS GUEST";
+"MSG416" = "LOGIN";
+
+
+"MSG417" = "Left QTY";
+"MSG418" = "Right QTY";
+"MSG419" = "QTY";
+"MSG420" = "Price";
+"MSG421" = "Left Lens Price";
+"MSG422" = "Right Lens Price";
+"MSG423" = "Message";
+"MSG424" = "Click here to register";
+"MSG425" = "Chat";
+
+
+"MSG426" = "New version is available download now";
+"MSG427" = "New Version";
+"MSG428" = "Not Now";
+"MSG429" = "Update";
+
+
+"MSG430" = "Offer";
+"MSG431" = "Search";
+"MSG432" = "Add to Cart";
+
+"MSG433" = "BEST SELLING";
+"MSG434" = "TOP BRANDS";
+"MSG435" = "VIEW ALL";
+
+"MSG436" = "WhatsApp";
+"MSG437" = "Please Install Whatsapp";
+"MSG438" = "Arabic";
+"MSG439" = "NEW RELEASE";
+"MSG440" = "SORT";
+"MSG441" = "FILTER";
+"MSG442" = "Offer Price:";
+"MSG443" = "CREATE ACCOUNT";
+"MSG444" = "Search Products";
+"MSG445" = "Choose Your Language";
