@@ -1553,12 +1553,12 @@ extension ProductListVC:UICollectionViewDelegate,UICollectionViewDataSource,UICo
     
                 if(self.currency.uppercased() == "KWD")
                 {
-                    price = String((dic.price as NSString).integerValue)
+                    price = String((dic.price as NSString))
                     //String(format:"%.3f",Double(dic.price)?.roundTo(places: 3) ?? 0.0)
                 }
                 else
                 {
-                    price = String((dic.price as NSString).integerValue)//String(format:"%.2f",Double(dic.price)?.roundTo(places: 2) ?? 0.0)
+                    price = String((dic.price as NSString))//String(format:"%.2f",Double(dic.price)?.roundTo(places: 2) ?? 0.0)
     
                 }
                 if (dic.sale_price.count > 0)
@@ -1594,11 +1594,11 @@ extension ProductListVC:UICollectionViewDelegate,UICollectionViewDataSource,UICo
                             tempPrice = basePrice - tempPrice
                             if(self.currency.uppercased() == "KWD")
                             {
-                                sprice = "\(Int(tempPrice))"//String(format:"%.3f",Double(tempPrice).roundTo(places: 3) )
+                                sprice = "\((format:"%.3f",Double(tempPrice).roundTo(places: 3) ))"//String(format:"%.3f",Double(tempPrice).roundTo(places: 3) )
                             }
                             else
                             {
-                                sprice = "\(Int(tempPrice))"//String(format:"%.2f",Double(tempPrice).roundTo(places: 2) )
+                                sprice = "\((format:"%.3f",Double(tempPrice).roundTo(places: 3) ))"//String(format:"%.2f",Double(tempPrice).roundTo(places: 2) )
     
                             }
     

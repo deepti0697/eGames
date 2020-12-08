@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -80,7 +80,7 @@
                             <constraint firstAttribute="trailing" secondItem="7Vs-4z-qkv" secondAttribute="trailing" constant="2" id="yGy-c9-KSw"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNU-oZ-ZhV">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNU-oZ-ZhV">
                         <rect key="frame" x="91" y="306" width="109" height="32"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boS-XR-q61" customClass="PaddingLabel" customModule="E_Games_Store" customModuleProvider="target">
@@ -97,6 +97,7 @@
                     </label>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="tXZ-y7-x14"/>
             <constraints>
                 <constraint firstItem="cNU-oZ-ZhV" firstAttribute="height" secondItem="Css-7N-yko" secondAttribute="height" id="2hR-5f-MIU"/>
                 <constraint firstAttribute="bottom" secondItem="Css-7N-yko" secondAttribute="bottom" id="5wN-ES-3fz"/>
@@ -119,7 +120,6 @@
                 <constraint firstItem="8JZ-SJ-zCw" firstAttribute="top" secondItem="rbg-mY-ag6" secondAttribute="top" id="lrk-ds-xje"/>
                 <constraint firstItem="cNU-oZ-ZhV" firstAttribute="width" secondItem="Css-7N-yko" secondAttribute="width" id="nUb-D0-gFd"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="tXZ-y7-x14"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                     <real key="value" value="4"/>
@@ -144,6 +144,13 @@
             <point key="canvasLocation" x="140.80000000000001" y="126.83658170914543"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="0xs-lP-tMO">
+            <size key="intrinsicContentSize" width="102" height="18"/>
+        </designable>
+        <designable name="boS-XR-q61"/>
+        <designable name="gtr-ld-ZJb"/>
+    </designables>
     <resources>
         <image name="Group 42" width="23" height="23"/>
         <image name="noImage" width="1500" height="944"/>

@@ -922,9 +922,9 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
             //                cell.labelTitle.text = title_ar
             //                }
             //            }
-                      cell.labelTitle.text = "PAYMENT VIA OFFLINE LINK"
+                      cell.labelTitle.text = "CASH ON DELIVERY"
                     }else{
-                      cell.labelTitle.text = "PAYMENT VIA OFFLINE LINK"
+                      cell.labelTitle.text = "CASH ON DELIVERY"
                     }
             
             

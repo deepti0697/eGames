@@ -460,19 +460,19 @@ extension OffersHomeVC:UICollectionViewDelegateFlowLayout,UICollectionViewDelega
                 let dic = OfferModel.sharedInstance.arrayOfferList[indexPath.row]
                 cell.labelProductName.text = dic.brand_name
                 
-                let offerPrice = (dic.deal_otd_discount as NSString).integerValue
+                let offerPrice = (dic.deal_otd_discount as NSString)
                 
                 cell.offerPriceLbl.text = NSLocalizedString("MSG442", comment: "") + " \(offerPrice)" + " KWD"
                 var price = ""
     
                 if(self.currency.uppercased() == "KWD")
                 {
-                    price = String((dic.price as NSString).integerValue)
+                    price = String((dic.price as NSString))
                     //String(format:"%.3f",Double(dic.price)?.roundTo(places: 3) ?? 0.0)
                 }
                 else
                 {
-                    price = String((dic.price as NSString).integerValue)//String(format:"%.2f",Double(dic.price)?.roundTo(places: 2) ?? 0.0)
+                    price = String((dic.price as NSString))//String(format:"%.2f",Double(dic.price)?.roundTo(places: 2) ?? 0.0)
     
                 }
                 if (dic.sale_price.count > 0)
