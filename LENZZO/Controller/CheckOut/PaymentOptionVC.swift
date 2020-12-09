@@ -15,6 +15,8 @@ import MFSDK
 class PaymentOptionVC: UIViewController {
 
     @IBOutlet weak var backImgView: UIImageView!
+    var selectedMethod:String?
+    var paymentOd = [PaymentModel]()
     var arraySelectedAllCartItems = [JSON]()
     var dicSelectedAddress = [String:JSON]()
     var promoDetails = [String:String]()
@@ -163,6 +165,7 @@ class PaymentOptionVC: UIViewController {
             }
 
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.backImgView.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate)
@@ -176,6 +179,7 @@ class PaymentOptionVC: UIViewController {
                {
                self.backImgView.transform = CGAffineTransform(rotationAngle: 245)
                }
+        
         getCartList()
         
     }
@@ -188,12 +192,12 @@ class PaymentOptionVC: UIViewController {
         self.arrayData.removeAll()
         self.arrayTempData.removeAll()
 
-        
         WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetPaymentMode, params: ["user_id":user_id], completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             DispatchQueue.main.async {
                 MBProgress().hideIndicator(view: self.view)
             }
+            
             if(!(err == nil))
             {
 //                KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: err?.localizedDescription ?? NSLocalizedString("MSG21", comment: ""))
@@ -201,23 +205,23 @@ class PaymentOptionVC: UIViewController {
                 
                 return
             }
+            
             let json = JSON(result)
             
             let statusCode = json["status"].string
             print(json)
             if(statusCode == "success")
             {
-                self.arrayData = json["result"].array ?? [JSON]()
+                self.arrayData = json["result"].arrayValue
                 
-                for ind in 0..<self.arrayData.count
+                for ind in self.arrayData
                 {
-                    self.arrayTempData.insert(0, at: self.arrayTempData.count)
+                    self.paymentOd.append(PaymentModel(response: ind))
                 }
                 self.tableView.reloadData()
                 
-                
-                
             }
+            
             else
             {
                 var message = json["message"].string
@@ -273,13 +277,9 @@ class PaymentOptionVC: UIViewController {
     
     func actionPayButton()
     {
-        
-        var param = [String:String]()
-        if self.headerIndex != nil{
         var strDCharge = ""
         var subTotalTemp = ""
         var grandTotalTemp = ""
-
         if(currency.uppercased() == "KWD")
         {
             strDCharge = String(format:"%.3f",self.deliveryCharge)
@@ -293,6 +293,11 @@ class PaymentOptionVC: UIViewController {
             subTotalTemp = String(format:"%.2f",self.subTotal)
             grandTotalTemp = String(format:"%.2f",self.grandTotal)
         }
+        var param:[String:String] = ["user_id":user_id,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
+        if self.headerIndex != nil{
+       
+
+       
 //            params.put("user_id", sessionManager.getUserId());
 //                           params.put("address_id", address_id);
 //                           params.put("cart_id", cart_id);
@@ -304,7 +309,7 @@ class PaymentOptionVC: UIViewController {
 //                           params.put("current_currency", sessionManager.getCurrencyCode());
 //                           params.put("tap_id", tap_id);
         //,"address_id":(dicSelectedAddress["id"]?.string)!
-         param = ["user_id":user_id,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
+         
             
         if(promoDetails.count > 0)
         {
@@ -328,7 +333,7 @@ class PaymentOptionVC: UIViewController {
         if(grandTotal <= 0.0)
         {
             param["payment_status"] = "free"
-            param["payment_mode_id"] = "1001"
+            param["payment_mode_id"] = paymentOd[0].id
             self.makeCODPayment(param: param)
         }
         else
@@ -396,7 +401,7 @@ class PaymentOptionVC: UIViewController {
             if(grandTotal <= 0.0)
             {
                 param["payment_status"] = "free"
-                param["payment_mode_id"] = "1001"
+                param["payment_mode_id"] = paymentOd[0].id
                 self.makeCODPayment(param: param)
             }
             else
@@ -409,7 +414,7 @@ class PaymentOptionVC: UIViewController {
     }
         else{
             
-            param["payment_mode_id"] = "\(self.selectedPaymentMethodId ?? 0)"
+            param["payment_mode_id"] = "\(self.selectedMethod ?? "")"
             self.paymentFatoorahApiCall(parms: param)
         }
         
@@ -436,23 +441,32 @@ class PaymentOptionVC: UIViewController {
                     print(executePaymentResponse.invoiceID)
                     
                     print("executePaymentResponse.invoiceStatus:- \(executePaymentResponse.invoiceStatus ?? "")")
-                    let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .alert)
-                                       let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
-                                       let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG233", comment: ""), attributes: msgFont)
-                                       alertView.setValue(msgAttrString, forKey: "attributedMessage")
-                                       let alertAction = UIAlertAction(title: NSLocalizedString("MSG18", comment: ""), style: .default) { (alert) in
+//                    let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .alert)
+//                                       let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
+//                                       let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG233", comment: ""), attributes: msgFont)
+//                                       alertView.setValue(msgAttrString, forKey: "attributedMessage")
+//                                       let alertAction = UIAlertAction(title: NSLocalizedString("MSG18", comment: ""), style: .default) { (alert) in
                                         parmaStore["tap_id"] = "\(executePaymentResponse.invoiceID ?? 0)"
-                                        self?.makeUserPayment(param: parmaStore)
-//                                           KeyConstant.sharedAppDelegate.setRoot()
- 
-                                       }
-                                       alertAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+//
+                                           
 
-                                       alertView.addAction(alertAction)
-                    self?.present(alertView, animated: true, completion: nil)
+                    
+                    
+                    
+////                                           KeyConstant.sharedAppDelegate.setRoot()
+//
+//                                       }
+//                                       alertAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+//
+//                                       alertView.addAction(alertAction)
+//                    self?.present(alertView, animated: true, completion: nil)
+                    self?.makeUserPayment(param: parmaStore)
                                        
                     
                 case .failure(let failError):
+//                    parmaStore["tap_id"] = "175988590"
+//
+//                    self?.makeUserPayment(param: parmaStore)
                     print(failError.errorDescription)
                     print(failError.localizedDescription)
                     
@@ -641,7 +655,6 @@ class PaymentOptionVC: UIViewController {
                         
                         KeyConstant.sharedAppDelegate.setRoot()
 
-                       
                         
                     }
                     alertAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
@@ -696,14 +709,14 @@ class PaymentOptionVC: UIViewController {
                     
                     return
                 }
+                
                 let json = JSON(result)
                 
                 let statusCode = json["status"].string
                 print(json)
                 if(statusCode == "success")
                 {
-                    
-                    
+                   
                     let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .alert)
                     let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
                     let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG233", comment: ""), attributes: msgFont)
@@ -969,7 +982,13 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
         if self.selectedIndex != nil{
             
             let methodId = self.paymentMethods[indexPth.row].paymentMethodId
+            for i in paymentOd {
+                if self.paymentMethods[indexPth.row].paymentMethodAr == i.name_ar {
+                    self.selectedMethod = i.id
+            }
+//            self.selectedMethod = self.paymentMethods[indexPth.row].paymentMethodAr
             selectedPaymentMethodId = methodId
+        }
         }
         
         self.tableView.reloadData()

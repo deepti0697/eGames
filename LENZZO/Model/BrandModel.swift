@@ -119,3 +119,21 @@ class BannerSliderCollection
     
     
 }
+struct PaymentModel{
+    var id:String?
+    var name:String?
+    var name_ar:String?
+    var logo:String?
+    var status:String?
+    var created_at:String?
+    var updated_at:String?
+    init(response:JSON) {
+        self.id = response["id"].stringValue
+        self.name = response["name"].stringValue
+        self.name_ar = response["name_ar"].stringValue
+        self.logo = response["logo"].stringValue
+        self.status = response["status"].stringValue
+        self.created_at = response["created_at"].stringValue
+        self.updated_at = response["updated_at"].stringValue
+    }
+}
