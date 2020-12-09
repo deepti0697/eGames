@@ -120,7 +120,7 @@ struct KeyConstant {
     
     static let APIGetCountryList = "country_list"
     static let APIPayment_by_cod = "payment_by_cod"
-    
+    static let payment_by_tap = "payment_by_tap"
     
     static let APIMyOrdersList = "orderlist"
     

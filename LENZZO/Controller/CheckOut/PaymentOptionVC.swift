@@ -20,7 +20,6 @@ class PaymentOptionVC: UIViewController {
     var promoDetails = [String:String]()
     var redeemPointsApplied = [String:String]()
 
-
     @IBOutlet weak var labelGrandTotal: PaddingLabel!
     @IBOutlet weak var labelDeliveryCharge: PaddingLabel!
     @IBOutlet weak var labelSubTotal: PaddingLabel!
@@ -275,7 +274,7 @@ class PaymentOptionVC: UIViewController {
     func actionPayButton()
     {
         
-        
+        var param = [String:String]()
         if self.headerIndex != nil{
         var strDCharge = ""
         var subTotalTemp = ""
@@ -294,8 +293,19 @@ class PaymentOptionVC: UIViewController {
             subTotalTemp = String(format:"%.2f",self.subTotal)
             grandTotalTemp = String(format:"%.2f",self.grandTotal)
         }
+//            params.put("user_id", sessionManager.getUserId());
+//                           params.put("address_id", address_id);
+//                           params.put("cart_id", cart_id);
+//                           params.put("gift_id", giftId);
+//                           params.put("payment_mode_id", paymentModeid);
+//                           params.put("delivery_charge", shippingCharge);
+//                           params.put("sub_total", sub_total);
+//                           params.put("total_order_price", "" + grand_total);
+//                           params.put("current_currency", sessionManager.getCurrencyCode());
+//                           params.put("tap_id", tap_id);
         //,"address_id":(dicSelectedAddress["id"]?.string)!
-        var param:[String:String] = ["user_id":user_id,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
+         param = ["user_id":user_id,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
+            
         if(promoDetails.count > 0)
         {
             let replacingCurrent = param.merging(promoDetails) {
@@ -304,6 +314,7 @@ class PaymentOptionVC: UIViewController {
             }
             param = replacingCurrent
         }
+            
         if(redeemPointsApplied.count > 0)
         {
             let replacingCurrentRedeem = param.merging(redeemPointsApplied) {
@@ -397,16 +408,18 @@ class PaymentOptionVC: UIViewController {
         }
     }
         else{
-          self.paymentFatoorahApiCall()
+            
+            param["payment_mode_id"] = "\(self.selectedPaymentMethodId ?? 0)"
+            self.paymentFatoorahApiCall(parms: param)
         }
         
         
     }
     
-    func paymentFatoorahApiCall(){
+    func paymentFatoorahApiCall(parms:[String:String]){
 
             
-        
+        var parmaStore = parms
         // executePayment
         let request = MFExecutePaymentRequest(invoiceValue: Decimal(self.grandTotal), paymentMethod: self.selectedPaymentMethodId!)
             
@@ -420,17 +433,18 @@ class PaymentOptionVC: UIViewController {
             
                 switch response {
                 case .success(let executePaymentResponse):
+                    print(executePaymentResponse.invoiceID)
+                    
                     print("executePaymentResponse.invoiceStatus:- \(executePaymentResponse.invoiceStatus ?? "")")
                     let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .alert)
                                        let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
                                        let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG233", comment: ""), attributes: msgFont)
                                        alertView.setValue(msgAttrString, forKey: "attributedMessage")
                                        let alertAction = UIAlertAction(title: NSLocalizedString("MSG18", comment: ""), style: .default) { (alert) in
-                                           
-                                           KeyConstant.sharedAppDelegate.setRoot()
-
-                                          
-                                           
+                                        parmaStore["tap_id"] = "\(executePaymentResponse.invoiceID ?? 0)"
+                                        self?.makeUserPayment(param: parmaStore)
+//                                           KeyConstant.sharedAppDelegate.setRoot()
+ 
                                        }
                                        alertAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
 
@@ -499,6 +513,8 @@ class PaymentOptionVC: UIViewController {
         
             grandTotal = String(format:"%.2f",self.grandTotal)
         }
+       
+
         let parameters = [
             "amount":grandTotal,
             "currency": currency,
@@ -598,6 +614,77 @@ class PaymentOptionVC: UIViewController {
             MBProgress().showIndicator(view: self.view)
             
             WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIPayment_by_cod, params: param, completionHandler: { (result: [String:Any], err:Error?) in
+                print(result)
+                DispatchQueue.main.async {
+                    MBProgress().hideIndicator(view: self.view)
+                }
+                if(!(err == nil))
+                {
+                    KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: err?.localizedDescription ?? NSLocalizedString("MSG21", comment: ""))
+                    
+                    
+                    return
+                }
+                let json = JSON(result)
+                
+                let statusCode = json["status"].string
+                print(json)
+                if(statusCode == "success")
+                {
+                    
+                    
+                    let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .alert)
+                    let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
+                    let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG233", comment: ""), attributes: msgFont)
+                    alertView.setValue(msgAttrString, forKey: "attributedMessage")
+                    let alertAction = UIAlertAction(title: NSLocalizedString("MSG18", comment: ""), style: .default) { (alert) in
+                        
+                        KeyConstant.sharedAppDelegate.setRoot()
+
+                       
+                        
+                    }
+                    alertAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+
+                    alertView.addAction(alertAction)
+                    self.present(alertView, animated: true, completion: nil)
+                    
+
+                    
+                }
+                else
+                {
+                    var message = json["message"].string
+                    
+                    if(HelperArabic().isArabicLanguage())
+                    {
+                        if let msg = json["message_ar"].string
+                        {
+                            if( msg.count > 0)
+                            {
+                                message = msg
+                            }
+                        }
+                    }
+                    KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: message ?? NSLocalizedString("MSG21", comment: ""))
+                }
+                
+            })
+            
+            
+            
+        
+        
+    }
+    
+    func makeUserPayment(param:[String:String])
+    {
+       
+       print(param)
+        
+            MBProgress().showIndicator(view: self.view)
+            
+            WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.payment_by_tap, params: param, completionHandler: { (result: [String:Any], err:Error?) in
                 print(result)
                 DispatchQueue.main.async {
                     MBProgress().hideIndicator(view: self.view)
