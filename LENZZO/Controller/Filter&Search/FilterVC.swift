@@ -188,7 +188,7 @@ class FilterVC: UIViewController,BrandFilterDelegate {
                 }
                 else if(slug == "brands")
                 {
-                    dicData[slug] =  self.brandID
+                    dicData["brand_id"] =  self.brandID
                     
                 }
                 else

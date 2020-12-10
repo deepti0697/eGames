@@ -16,8 +16,8 @@ protocol ReloadFamilyListDelegate
     func reloadDataSelected()
 }
 class ProductListVC: UIViewController,ReloadDataDelegate,ReloadProductDataDelegate,ReloadProductListDelegate,SelectedSortDelegate,FilterReloadDelegate {
-    @IBOutlet weak var imageViewBackOption: UIImageView!
     
+    @IBOutlet weak var imageViewBackOption: UIImageView!
     var filterDicData = [String:String]()
     var arrTempSelectedRowAllData = Array<Any>()
     var arrayBrandSelected = [String]()

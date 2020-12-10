@@ -219,7 +219,7 @@ class TopBrandListVC: UIViewController {
                 if(productId.count > 0)
                 {
                     // let shareProductURL = "com.Lenzzo://product?id=\(productId)"http://139.59.93.33/
-                    let shareProductURL = "http://139.59.93.33/share.php?productid=\(productId)"
+                    let shareProductURL = "http://139.59.93.33/share?productId=\(productId)"
 
                     let url1 = URL(string:shareProductURL)
 

@@ -392,7 +392,9 @@ class PaymentOptionVC: UIViewController {
 //            }
 //            KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG231", comment: ""))
             
+            
             param["payment_status"] = "pending"
+            param["payment_mode_id"] = paymentOd[0].id
             self.makeCODPayment(param: param)
 
         }
