@@ -550,49 +550,49 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     @IBAction func buttonSave(_ sender: Any) {
         
        // APIAddAddress
-        guard let name = textFieldName.text, (!(name.isEmpty)) else
-            
-        {
-            KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG1", comment: ""),textField:textFieldName )
-            return
-        }
+//        guard let name = textFieldName.text, (!(name.isEmpty)) else
+//            
+//        {
+//            KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG1", comment: ""),textField:textFieldName )
+//            return
+//        }
         
-        if(self.currentLocationName.text?.count == 0 && self.viewSharedLocation.isHidden == true)
-        {
-            guard let area = textFieldArea.text, (!(area.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG208", comment: ""),textField:textFieldArea )
-                return
-            }
-            guard let block = textFieldBlock.text, (!(block.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG220", comment: ""),textField:textFieldBlock )
-                return
-            }
-            guard let street = textFieldStreet.text, (!(street.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG221", comment: ""),textField:textFieldStreet )
-                return
-            }
-            guard let house = textFieldHouse.text, (!(house.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG222", comment: ""),textField:textFieldHouse )
-                return
-            }
-        }
-        else
-        {
-            guard let area = currentLocationName.text, (!(area.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG247", comment: ""),textField:UITextField() )
-                return
-            }
-        }
+//        if(self.currentLocationName.text?.count == 0 && self.viewSharedLocation.isHidden == true)
+//        {
+//            guard let area = textFieldArea.text, (!(area.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG208", comment: ""),textField:textFieldArea )
+//                return
+//            }
+//            guard let block = textFieldBlock.text, (!(block.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG220", comment: ""),textField:textFieldBlock )
+//                return
+//            }
+//            guard let street = textFieldStreet.text, (!(street.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG221", comment: ""),textField:textFieldStreet )
+//                return
+//            }
+//            guard let house = textFieldHouse.text, (!(house.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG222", comment: ""),textField:textFieldHouse )
+//                return
+//            }
+//        }
+//        else
+//        {
+//            guard let area = currentLocationName.text, (!(area.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG247", comment: ""),textField:UITextField() )
+//                return
+//            }
+//        }
        
         guard let phone = textFieldPhoneNumber.text, (!(phone.isEmpty)) else
             
@@ -621,32 +621,32 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
         }
         
 
-        if (textFieldPACI.text!.isEmpty)
-        {
-            
-
-            guard let house = textFieldHouse.text, (!(house.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG378", comment: ""),textField:textFieldHouse )
-                return
-            }
-            guard let floor = textFieldFloorNum.text, (!(floor.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG379", comment: ""),textField:textFieldFloorNum )
-                return
-            }
-            guard let flat = textFieldFlatNum.text, (!(flat.isEmpty)) else
-                
-            {
-                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG380", comment: ""),textField:textFieldFlatNum )
-                return
-            }
-            
-            
-        }
-        
+//        if (textFieldPACI.text!.isEmpty)
+//        {
+//
+//
+//            guard let house = textFieldHouse.text, (!(house.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG378", comment: ""),textField:textFieldHouse )
+//                return
+//            }
+//            guard let floor = textFieldFloorNum.text, (!(floor.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG379", comment: ""),textField:textFieldFloorNum )
+//                return
+//            }
+//            guard let flat = textFieldFlatNum.text, (!(flat.isEmpty)) else
+//
+//            {
+//                KeyConstant.sharedAppDelegate.showAlertViewWithTextField(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG380", comment: ""),textField:textFieldFlatNum )
+//                return
+//            }
+//
+//
+//        }
+//
              var comments  = ""
             let phoneNumber = textFieldPhoneNumber.text ?? ""
             if(textViewComments.textColor == .black)

@@ -181,9 +181,97 @@ class PaymentOptionVC: UIViewController {
                }
         
         getCartList()
+        getCountryLanguage()
         
     }
-
+    func getCountryLanguage()
+    {
+        
+        MBProgress().showIndicator(view: self.view)
+        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: [:], completionHandler: { (result: [String:Any], err:Error?) in
+            print(result)
+            DispatchQueue.main.async {
+                MBProgress().hideIndicator(view: self.view)
+            }
+            if(!(err == nil))
+            {
+                KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: err?.localizedDescription ?? NSLocalizedString("MSG21", comment: ""))
+                
+                
+                return
+            }
+            let json = JSON(result)
+            
+            let statusCode = json["status"].string
+            print(json)
+            if(statusCode == "success")
+            {
+                let arrayData = json["result"].array ?? [JSON]()
+                if let isCountrySelected = KeyConstant.user_Default.value(forKey: KeyConstant.kSelectedCurrency) as? String
+                {
+                    if(isCountrySelected.count > 0)
+                    {
+                        for ind in 0..<arrayData.count
+                        {
+                            if(arrayData[ind]["currency_code"].string?.lowercased() == isCountrySelected.lowercased())
+                            {
+                                self.deliveryCharge = self.getPrice(dictData: arrayData[ind].dictionary!)
+                                self.labelDeliveryCharge.text = "\(self.getPrice(dictData: arrayData[ind].dictionary!))"
+                                self.grandTotal = Double(self.subTotal + self.deliveryCharge).roundTo(places: 3)
+                                if(self.currency.uppercased() == "KWD")
+                                {
+                                    self.labelSubTotal.text = "\(NSLocalizedString("MSG329", comment: "")) : \(String(format:"%.3f",self.subTotal)) \(self.currency)"
+                                    self.labelDeliveryCharge.text = "\(NSLocalizedString("MSG353", comment: "")) : \(String(format:"%.3f",self.deliveryCharge)) \(self.currency)"
+                                    self.labelGrandTotal.text = "\(NSLocalizedString("MSG354", comment: "")) : \(String(format:"%.3f",self.grandTotal)) \(self.currency)"        }
+                                else
+                                {
+                                    self.labelSubTotal.text = "\(NSLocalizedString("MSG329", comment: "")) : \(String(format:"%.2f",self.subTotal)) \(self.currency)"
+                                    self.labelDeliveryCharge.text = "\(NSLocalizedString("MSG353", comment: "")) : \(String(format:"%.2f",self.deliveryCharge)) \(self.currency)"
+                                    self.labelGrandTotal.text = "\(NSLocalizedString("MSG354", comment: "")) : \(String(format:"%.2f",self.grandTotal)) \(self.currency)"
+                                }
+                                return
+                            }
+                        }
+                    }
+                }
+               
+            }
+            
+                var message = json["message"].string
+                
+                if(HelperArabic().isArabicLanguage())
+                {
+                    if let msg = json["message_ar"].string
+                    {
+                        if( msg.count > 0)
+                        {
+                            message = msg
+                        }
+                    }
+            }
+            KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: message ?? NSLocalizedString("MSG21", comment: ""))
+            
+            
+        })
+    }
+    func getPrice(dictData:[String:JSON]) -> Double
+    {
+        var price = 0.0
+        
+        if let priceDouble = dictData["delivery_charge"]?.double
+        {
+            price = priceDouble
+        }
+        else if let priceInt = dictData["delivery_charge"]?.int
+        {
+            price = Double(priceInt)
+        }
+        else
+        {
+            price =  Double(dictData["delivery_charge"]?.string ?? "0.0") ?? 0.0
+        }
+        return price
+    }
     func getAllPaymentOptions()
     {
         

@@ -216,7 +216,7 @@ class CheckOutVC: UIViewController {
                                objVC.redeemPointsApplied =  self.redeemPointsApplied
 
                                objVC.arraySelectedAllCartItems = self.arraySelectedAllCartItems
-                              // objVC.deliveryCharge = self.getPrice(dictData: arrayData[ind].dictionary!)
+//                               objVC.deliveryCharge = self.getPrice(dictData: arrayData[ind].dictionary!)
                                self.present(objVC, animated: false, completion: nil)
                                return
                 }
