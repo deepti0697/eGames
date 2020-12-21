@@ -964,7 +964,8 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
             {
                 // let shareProductURL = "com.Lenzzo://product?id=\(productId)"
                  
-                let shareProductURL = "http://139.59.93.33/share?productId=\(productId)"
+                let shareProductURL = "http://e-gamesstore.com/share?productId=\(productId)"
+//                    "http://139.59.93.33/share?productId=\(productId)"
 //                    "http://139.59.93.33/share?productId=\(productId)" //"https://www.e-gamesstore.com/share.php?productid=\(productId)"
 
                 let url1 = URL(string:shareProductURL)
