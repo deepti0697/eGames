@@ -105,7 +105,7 @@ class PaymentOptionVC: UIViewController {
             }
         
         
-        if(grandTotal > 0.0)
+        if(grandTotal >= 0.0)
         {
             self.labelPayNow.text = NSLocalizedString("MSG387", comment: "")
         self.getAllPaymentOptions()
@@ -513,10 +513,12 @@ class PaymentOptionVC: UIViewController {
     
     func paymentFatoorahApiCall(parms:[String:String]){
 
-            
+        guard let paymentMethodId = self.selectedPaymentMethodId else{
+            return
+        }
         var parmaStore = parms
         // executePayment
-        let request = MFExecutePaymentRequest(invoiceValue: Decimal(self.grandTotal), paymentMethod: self.selectedPaymentMethodId!)
+        let request = MFExecutePaymentRequest(invoiceValue: Decimal(self.grandTotal), paymentMethod: paymentMethodId)
             
             // Uncomment this to add ptoducts for your invoice
             // var productList = [MFProduct]()
@@ -1077,8 +1079,10 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
                     self.selectedMethod = i.id
             }
 //            self.selectedMethod = self.paymentMethods[indexPth.row].paymentMethodAr
-            selectedPaymentMethodId = methodId
+            
         }
+            
+            selectedPaymentMethodId = methodId
         }
         
         self.tableView.reloadData()

@@ -114,7 +114,7 @@ class AJAlertController: UIViewController {
             case .unspecified: break
             case .tv: break
             case .carPlay: break
-        case .mac: break
+        //case .mac: break
         }
     }
     
