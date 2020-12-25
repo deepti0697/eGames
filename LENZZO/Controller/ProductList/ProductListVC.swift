@@ -58,7 +58,7 @@ class ProductListVC: UIViewController,ReloadDataDelegate,ReloadProductDataDelega
     
     var selectedType = [String:String]()   //0 = "MSG226"   1= "MSG227"    2= "MSG228"
     let htmlfontStyle =  "<style>body{font-family:'FuturaBT-Medium'; font-size:'13.0';}</style>"
-    
+    var isWishList = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -207,12 +207,17 @@ class ProductListVC: UIViewController,ReloadDataDelegate,ReloadProductDataDelega
 //            else if(self.brandId.count < 1)
 //            {
 //                //wishlist data
-//               // self.setFavouriteList()
+//               //
 //            }
 //            else
 //            {
                 //all normal data
-                self.setProductList()
+            if self.isWishList{
+                self.setFavouriteList()
+            }else{
+               self.setProductList()
+            }
+                
 //            }
             
         }
@@ -330,7 +335,14 @@ class ProductListVC: UIViewController,ReloadDataDelegate,ReloadProductDataDelega
             brand_id = brandId
         }
         
-        ProductListViewModel().getBrandCatProductList(vc: self, itemId: brand_id, APIName: KeyConstant.APIProductSearchByName, sortIndex: selectedType, customParam: customParam, filterParam: filterDicData, completionHandler: { (result:[JSON], success: Bool, errorC:Error?) in
+        var apiName = ""
+        if self.isWishList{
+            apiName = KeyConstant.APIViewWishlist
+        }else{
+            apiName = KeyConstant.APIProductSearchByName
+        }
+        
+        ProductListViewModel().getBrandCatProductList(vc: self, itemId: brand_id, APIName: apiName, sortIndex: selectedType, customParam: customParam, filterParam: filterDicData, completionHandler: { (result:[JSON], success: Bool, errorC:Error?) in
             if(errorC != nil)
             {
                 self.setFilterData()
@@ -445,7 +457,7 @@ class ProductListVC: UIViewController,ReloadDataDelegate,ReloadProductDataDelega
                 self.labelNotFound.isHidden = true
                 
             }
-           // self.collectionView.reloadData()
+            self.collectionView.reloadData()
         })
         
     }
@@ -1670,7 +1682,19 @@ extension ProductListVC:UICollectionViewDelegate,UICollectionViewDataSource,UICo
                 cell.addtoCartBtn.isUserInteractionEnabled = true
                 cell.addtoCartBtn.setTitleColor(UIColor(hexString: "8BC6E9"), for: .normal)
     
-    
+                cell.favBtn.tag = indexPath.item
+                cell.favBtn.addTarget(self, action: #selector(favBtnClicked(sender:)), for: .touchUpInside)
+                cell.favBtn.isUserInteractionEnabled = true
+                
+                if let wishlist = dic.wishlist{
+                    if wishlist == "1"{
+                        cell.favBtn.setImage(UIImage(named: "heart-fill"), for: .normal)
+                    }else{
+                        cell.favBtn.setImage(UIImage(named: "fav"), for: .normal)
+                    }
+                }
+               
+                
                 if(dic.cate_id == "2")
                 {
                    // cell.addtoCartLbl.setTitle(NSLocalizedString("MSG432", comment: ""), for: .normal)
@@ -1807,6 +1831,23 @@ extension ProductListVC:UICollectionViewDelegate,UICollectionViewDataSource,UICo
             self.addToCart()
             
         }
+    }
+    
+    
+    @objc func favBtnClicked(sender:UIButton){
+            
+    
+    
+            let paramOfAction: [String:String] = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":ProductListModel.sharedInstance.arrayProductList[sender.tag].id]
+    
+            WishListViewModel().addToWishlist(vc: self, param: paramOfAction) { (isDone:Bool, error:Error?) in
+    
+    
+//                WishListViewModel().getAllWishlistProduct(vc: self, completionHandler: { (success: Bool, errorC:Error?) in
+                    self.displayProductList()
+//                })
+            }
+        
     }
     
     

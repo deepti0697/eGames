@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class MyAccountVC: UIViewController, UITextFieldDelegate {
     var arrayData = [JSON]()
-    var arrayOptions = [NSLocalizedString("MSG261", comment: ""),NSLocalizedString("MSG368", comment: ""),NSLocalizedString("MSG262", comment: ""),NSLocalizedString("MSG263", comment: ""),NSLocalizedString("MSG114", comment: "")]
+    var arrayOptions = [NSLocalizedString("MSG261", comment: ""),NSLocalizedString("MSG368", comment: ""),NSLocalizedString("MSG238", comment: ""),NSLocalizedString("MSG262", comment: ""),NSLocalizedString("MSG263", comment: ""),NSLocalizedString("MSG114", comment: "")]
     
     @IBOutlet weak var headerTopView: UIView!
     @IBOutlet weak var viewCall: UIView!
@@ -463,18 +463,24 @@ extension MyAccountVC: UITableViewDelegate, UITableViewDataSource
             }
             self.present(objFav, animated: false, completion: nil)
             break
-        case 2:
+            
+            case 2:
+                       let objFav = self.storyboard?.instantiateViewController(withIdentifier: "ProductListVC") as! ProductListVC
+                       objFav.isWishList = true
+                       self.present(objFav, animated: false, completion: nil)
+                       break
+        case 3:
             DispatchQueue.main.async {
                 
                 let objFav = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
                 self.present(objFav, animated: false, completion: nil)
             }
             break
-        case 3:
+        case 4:
             let objFav = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
             self.present(objFav, animated: false, completion: nil)
             break
-        case 4:
+        case 5:
             SignupViewModel().logout(vc: self)
             
             break

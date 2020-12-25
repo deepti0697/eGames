@@ -246,7 +246,7 @@ class ContactUS: UIViewController,MFMailComposeViewControllerDelegate {
         
         self.arrayData.removeAll()
         
-        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: [:], completionHandler: { (result: [String:Any], err:Error?) in
+        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: ["only_selected_countries":"1"], completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             DispatchQueue.main.async {
                 MBProgress().hideIndicator(view: self.view)

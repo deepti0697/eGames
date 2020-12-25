@@ -16,6 +16,7 @@ class ProductListCVCell: UICollectionViewCell {
     
     @IBOutlet weak var productPriceLbl: PaddingLabel!
     
+    @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var addToCartImgView: UIImageView!
     
     @IBOutlet weak var addtoCartLbl: UILabel!

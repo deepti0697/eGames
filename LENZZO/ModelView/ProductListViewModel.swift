@@ -22,12 +22,12 @@ class ProductListViewModel
         
         if(APIName == KeyConstant.APIProductSearchByName)
         {
-            prama = ["brand_id":itemId]
+            prama = ["brand_id":itemId,"user_id":KeyConstant.sharedAppDelegate.getUserId()]
         }
         else if(APIName == KeyConstant.APIViewWishlist)
         {
             
-            prama = ["user_id":KeyConstant.sharedAppDelegate.getUserId()]
+            prama = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"wishlist":"1"]
         }
         else
         {
@@ -73,6 +73,8 @@ class ProductListViewModel
         let current_currency = KeyConstant.user_Default.value(forKey: KeyConstant.kSelectedCurrency) as! String
         prama["current_currency"] = current_currency.uppercased()
         print("updated dic data: \(prama)")
+        
+        
         
         WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIProductSearchByName, params: prama, completionHandler: { (result: [String:Any], err:Error?) in
             print(result)

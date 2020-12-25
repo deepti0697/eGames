@@ -63,7 +63,7 @@ class BrandModelview
         MBProgress().showIndicator(view: vc.view)
         
         
-        let param = ["only_deal_otd":"1"]
+        let param = ["only_deal_otd":"1","user_id":KeyConstant.sharedAppDelegate.getUserId()]
         WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIViewOffers, params: param, completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             MBProgress().hideIndicator(view: vc.view)

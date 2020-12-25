@@ -49,6 +49,7 @@ class OfferModel
         var tags:String!
         var stock_flag:String!
         var start_range:String!
+        var wishlist:String!
         
         init(dictData:[String:JSON])
         {
@@ -68,7 +69,7 @@ class OfferModel
             //self.arrChild = dictData["child"]?.array ?? [JSON]()
             //self.brand_slider_images = dictData["brand_slider_images"]?.string ?? ""
             self.image = dictData["offer"]?["image"].string ?? ""
-            
+            self.wishlist = dictData["wishlist"]?.string ?? ""
             if let offerName = dictData["offer"]?["offer_subtitle"].string
             {
                 self.offer_name = offerName

@@ -20,7 +20,7 @@ class ProductDetailsViewModel
         MBProgress().showIndicator(view: vc.view)
         let current_currency = KeyConstant.user_Default.value(forKey: KeyConstant.kSelectedCurrency) as! String
         
-        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIProductDetails, params: ["product_id":productId,"current_currency":current_currency.uppercased()], completionHandler: { (result: [String:Any], err:Error?) in
+        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIProductDetails, params: ["product_id":productId,"current_currency":current_currency.uppercased(),"user_id":KeyConstant.sharedAppDelegate.getUserId()], completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             MBProgress().hideIndicator(view: vc.view)
             if(!(err == nil))

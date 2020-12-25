@@ -32,7 +32,8 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
     @IBOutlet weak var productNameLbl: UILabel!
     @IBOutlet weak var productOfferLbl: UILabel!
     
-//    @IBOutlet weak var backImgView: UIImageView!
+    @IBOutlet weak var favImgView: UIImageView!
+    //    @IBOutlet weak var backImgView: UIImageView!
     
     
     var paramOfAction = [String:String]()
@@ -192,463 +193,8 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
         
         arrayQunatity = [1,2,3,4,5,6,7,8,9,10]
         
-        self.pickerView.reloadAllComponents()
-        
-        arrayRelatedProductList.removeAll()
-        dicProductList.removeAll()
-      //  self.showPower()
-        
-        ProductDetailsViewModel().getProductDetailsJSON(vc: self, productId: productId, completionHandler: { (result:[String:JSON], relatedArray:[JSON],ratingResult:[String:JSON],success: Bool, errorC:Error?) in
-            
-            
-//            if(ratingResult.count > 0)
-//            {
-//                self.dicRatingList = ratingResult
-//                self.ratingShow()
-//
-//            }
-            
-            
-            
-            if(result.count > 0)
-            {
-                self.dicProductList = result
-            }
-            
-            if(self.dicProductList.count > 0)
-            {
-                
-//                if let isPowerAvailable = self.dicProductList["power"]?.dictionary
-//                {
-//                    if (isPowerAvailable.count == 0)
-//                    {
-//                        self.hidePower()
-//                    }
-//                    else
-//                    {
-//
-//                        if let isPowerAvailablee = self.dicProductList["power_range"]?.array
-//                        {
-//                            if(isPowerAvailablee.count > 0)
-//                            {
-//
-//                                if let powerAvailable = isPowerAvailable["start_range"]?.string
-//                                {
-//                                    if(powerAvailable.count == 0)
-//                                    {
-//                                        self.hidePower()
-//                                    }
-//                                }
-//                                else
-//                                {
-//                                    self.hidePower()
-//
-//                                }
-//                            }
-//                            else
-//                            {
-//                                self.hidePower()
-//
-//                            }
-//                        }
-//
-//                        else
-//                        {
-//                            self.hidePower()
-//
-//                        }
-//                    }
-//                }
-//                else
-//                {
-//                    self.hidePower()
-//
-//                }
-//
-                self.productNameLbl.text = self.dicProductList["title"]?.string ?? ""
-                self.productNameLbl.numberOfLines = 4
-                //self.labelDesc.text = self.dicProductList["description"]?.string?.html2String ?? ""
-                
-                
-                
-                
-                if(HelperArabic().isArabicLanguage())
-                {
-                    if let title_ar =  self.dicProductList["title_ar"]?.string
-                    {
-                        if(title_ar.count > 0)
-                        {
-                            self.productNameLbl.text = title_ar
-                        }
-                        
-                    }
-                    if let description_ar =  self.dicProductList["description_ar"]?.string
-                    {
-                        if(description_ar.count > 0)
-                        {
-                            //  self.labelDesc.text = description_ar.html2String
-//                            self.labelDesc.setHTML(html: description_ar + self.htmlfontStyle)
-                            self.textViewDescriptions.setHTML(html: description_ar)
-                            self.textViewDescriptions.textColor = .white
-                            if HelperArabic().isArabicLanguage(){
-                                self.textViewDescriptions.textAlignment = .right
-                            }else{
-                                self.textViewDescriptions.textAlignment = .left
-                            }
-                            
-                        }
-                        else
-                        {
-//                            self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
-                            
-                            self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? "") )
-                            self.textViewDescriptions.textColor = .white
-                            if HelperArabic().isArabicLanguage(){
-                                self.textViewDescriptions.textAlignment = .right
-                            }else{
-                                self.textViewDescriptions.textAlignment = .left
-                            }
-                        }
-                    }
-                    else
-                    {
-//                        self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
-                        
-                        self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? "") )
-                        self.textViewDescriptions.textColor = .white
-                        if HelperArabic().isArabicLanguage(){
-                            self.textViewDescriptions.textAlignment = .right
-                        }else{
-                            self.textViewDescriptions.textAlignment = .left
-                        }
-                    }
-                    
-                }
-                else
-                {
-//                    self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
-                    
-                    self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? ""))
-                    self.textViewDescriptions.textColor = .white
-                    if HelperArabic().isArabicLanguage(){
-                        self.textViewDescriptions.textAlignment = .right
-                    }else{
-                        self.textViewDescriptions.textAlignment = .left
-                    }
-                }
-                
-                
-                if let arrayModelNum = self.dicProductList["model_no"]?.string
-                {
-                    if(arrayModelNum.count > 0)
-                    {
-                       // self.labelProductCode.text = "\(NSLocalizedString("MSG405", comment: "")): \(arrayModelNum)"
-                        
-                    }
-                    
-                }
-                
-                
-                
-                
-                
-               
-                
-                
-                print(self.dicProductList)
-                
-                if (self.dicProductList["sale_price"]?.string?.count ?? 0 > 0)
-                {
-                    let sellPriceTemp  = Double(self.dicProductList["sale_price"]?.string ?? "0.0") ?? 0.0
-                    if(sellPriceTemp > 0.0)
-                    {
-                        var tempPrice = 0.0
-                        var basePrice = 0.0
-                        
-                        if(self.currency.uppercased() == "KWD")
-                        {
-                            tempPrice = Double(self.dicProductList["sale_price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
-                            basePrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
-                            
-                        }
-                        else
-                        {
-                            tempPrice = Double(self.dicProductList["sale_price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
-                            basePrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
-                            
-                        }
-                        
-                        if(tempPrice < basePrice)
-                        {
-                            tempPrice = basePrice - tempPrice
-                            var sprice = ""
-                            if(self.currency.uppercased() == "KWD")
-                            {
-                                sprice = String(format:"%.3f",Double(tempPrice).roundTo(places: 3) )
-                            }
-                            else
-                            {
-                                sprice = String(format:"%.2f",Double(tempPrice).roundTo(places: 2) )
-                                
-                            }
-                            let combination = NSMutableAttributedString()
-                            
-                            combination.append(self.getSimpleText(price: String(sprice) + " \(self.currency) "))
-                            
-                            
-                            self.leftSalePriceAttributed = self.getStrikeText(price: String(self.dicProductList["price"]?.string ?? "") + " \(self.currency)")
-                            
-                            combination.append(self.getStrikeText(price: String(self.dicProductList["price"]?.string ?? "")))
-                            combination.append(self.getSimpleText(price: " \(self.currency)"))
-                            self.leftpriceLbl.attributedText = combination
-                            if(self.currency.uppercased() == "KWD")
-                            {
-                                self.leftPowerPrice = Double(tempPrice).roundTo(places: 3)
-                            }
-                            else
-                            {
-                                self.leftPowerPrice = Double(tempPrice).roundTo(places: 2)
-                                
-                            }
-                        }
-                        else
-                        {
-                            if(self.currency.uppercased() == "KWD")
-                            {
-                                self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
 
-                                self.leftpriceLbl.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
-
-                            }
-                            else
-                            {
-
-                                self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
-
-                                self.leftpriceLbl.text = String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
-
-
-                            }
-                        }
-                        
-                        
-                    }
-                    else
-                    {
-                        if(self.currency.uppercased() == "KWD")
-                        {
-                            self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
-
-                            //self.labelLeftPrice.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
-                            self.leftpriceLbl.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
-
-                        }
-                        else
-                        {
-
-                            self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
-
-                            self.leftpriceLbl.text = String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
-
-
-                        }
-
-                    }
-                }
-                else
-                    
-                {
-                    
-                    if(self.currency.uppercased() == "KWD")
-                    {
-                        self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
-                        
-                        self.leftpriceLbl.text =  String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
-                        
-                    }
-                    else
-                    {
-                        
-                        self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
-                        
-                        self.leftpriceLbl.text =  String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
-                        
-                        
-                    }
-                    
-                }
-                
-                if let offerAvailable = self.dicProductList["offer_name"]?.string
-                {
-//                    if(offerAvailable.count > 0)
-//                    {
-//                        self.labelOffer.text = offerAvailable
-//
-//                        if(HelperArabic().isArabicLanguage())
-//                        {
-//
-//                            if let offerName_ar = self.dicProductList["offer"]?["name_ar"].string
-//                            {
-//                                self.labelOffer.text = offerName_ar
-//                            }
-//                        }
-//                        self.labelOffers.isHidden = false
-//                        self.heightConstraintOfferTitle.constant = 30
-//                        self.offerHeightConstraint.constant = 30
-//                    }
-//                    else
-//                    {
-//                        self.labelOffer.text = ""
-//                        self.labelOffers.isHidden = true
-//                        self.heightConstraintOfferTitle.constant = 0
-//                        self.offerHeightConstraint.constant = 0
-//                    }
-                    
-                    self.productOfferLbl.text = offerAvailable
-                }
-//                else
-//                {
-//                    self.labelOffer.text = ""
-//                    self.labelOffers.isHidden = true
-//                    self.heightConstraintOfferTitle.constant = 0
-//                    self.offerHeightConstraint.constant = 0
-//                }
-                
-                if let deal_otd = self.dicProductList["deal_otd"]?.stringValue,deal_otd == "1"{
-                                   if let deal_otd_discount = self.dicProductList["deal_otd_discount"]?.stringValue{
-                                       self.productOfferLbl.text = NSLocalizedString("MSG442", comment: "") + " " + deal_otd_discount + " KWD"
-                                   }
-
-                               }
-                
-                
-                
-                
-                self.buttonAddCart.setTitleColor(.white, for: .normal)
-                
-                
-                if let strQuantity = self.dicProductList["quantity"]?.string
-                {
-                    
-                    if((Int(strQuantity) ?? 0) < 1 || strQuantity.count < 1)
-                    {
-                        
-                        self.buttonAddCart.setTitle( NSLocalizedString("MSG195", comment: ""), for: .normal)
-                        
-                        self.buttonAddCart.isUserInteractionEnabled = false
-                        self.arrayQunatity.removeAll()
-                        self.pickerView.reloadAllComponents()
-                       // self.labelLeftQty.text = "0"
-                        self.buttonAddCart.setTitleColor(.white, for: .normal)
-                        
-                        
-                    }
-                    else if(Int(strQuantity) ?? 0 > 0)
-                    {
-                        self.arrayQunatity.removeAll()
-                        
-                        
-                        
-                        let countQunt = Int(strQuantity) ?? 0
-                        if(countQunt > 10)
-                        {
-                            for indexT in 0..<10
-                            {
-                                self.arrayQunatity.insert(indexT + 1, at: self.arrayQunatity.count)
-                                
-                            }
-                        }
-                        else
-                        {
-                            for indexT in 0..<countQunt
-                            {
-                                self.arrayQunatity.insert(indexT + 1, at: self.arrayQunatity.count)
-                                
-                            }
-                        }
-                        
-//                        if( self.arrayQunatity.count > 0)
-//                        {
-//                            self.labelLeftQty.text = String(self.arrayQunatity[0])
-//                        }
-//                        else
-//                        {
-//                            self.labelLeftQty.text = "0"
-//                        }
-                        if let strStockFlag = self.dicProductList["stock_flag"]?.string
-                            
-                        {
-                            if((Int(strStockFlag) ?? 0) < 1 || strStockFlag.count < 1)
-                            {
-                                self.buttonAddCart.setTitle( NSLocalizedString("MSG195", comment: ""), for: .normal)
-                                self.buttonAddCart.setTitleColor(.white, for: .normal)
-                                
-                                self.buttonAddCart.isUserInteractionEnabled = false
-                                self.arrayQunatity.removeAll()
-                                self.pickerView.reloadAllComponents()
-                               // self.labelLeftQty.text = "0"
-                            }
-                        }
-                        self.pickerView.reloadAllComponents()
-                        
-                    }
-                }
-                
-                
-                // self.viewWillLayoutSubviews()
-                
-                
-                //                let stringVariation = ProductDetailsModel.sharedInstance.arrayProductList[0].variations
-                //                if((stringVariation?.count) ?? 0 > 0)
-                //                {
-                //                    self.arrayShade = stringVariation?.components(separatedBy: ",") ?? [String]()
-                //                    if(self.arrayShade.count > 0)
-                //                    {
-                //                    self.textFieldSelectShade.text = self.arrayShade[0]
-                //                    }
-                //                    else
-                //                    {
-                //                        self.textFieldSelectShade.text = ""
-                //                    }
-                //                }
-                
-                self.setSlider()
-                self.pickerView.reloadAllComponents()
-                if let img = self.dicProductList["product_image"]?.stringValue{
-                    let imgStr = KeyConstant.kImageBaseProductURL + img
-                    let urlString = imgStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-
-                    let url = URL(string: urlString!)
-                    let processor = DownsamplingImageProcessor(size:  (self.egamesImgView.frame.size))
-                                          >> RoundCornerImageProcessor(cornerRadius: 0)
-                    self.egamesImgView.kf.indicatorType = .none
-                    self.egamesImgView.kf.setImage(
-                                          with: url,
-                                          placeholder: UIImage(named: "no_image"),
-                                          options: [
-                                              .processor(processor),
-                                              .scaleFactor(UIScreen.main.scale),
-                                              .transition(.fade(1)),
-                                              .cacheOriginalImage
-                                      ])
-                    
-                }
-               
-                
-            }
-            if(relatedArray.count > 0)
-            {
-                
-                self.arrayRelatedProductList = relatedArray
-                self.itemWidth = 0.0
-                self.viewDidLayoutSubviews()
-                
-            }
-            
-            
-            
-        })
-        
+        self.productDetialApiCall()
 //        self.backImgView.image = UIImage(named: "arrow")?.withRenderingMode(.alwaysTemplate)
 //        self.backImgView.tintColor = .white
       //  self.showFavIcon()
@@ -681,6 +227,428 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
         self.buttonAddCart.titleLabel?.font = UIFont(name: FontLocalization.medium.strValue, size: 14.0)
         //self.textViewDescriptions.font = UIFont(name: FontLocalization.medium.strValue, size: 15.0)
         
+    }
+    
+    func productDetialApiCall(){
+                self.pickerView.reloadAllComponents()
+                
+                arrayRelatedProductList.removeAll()
+                dicProductList.removeAll()
+              //  self.showPower()
+                
+                ProductDetailsViewModel().getProductDetailsJSON(vc: self, productId: productId, completionHandler: { (result:[String:JSON], relatedArray:[JSON],ratingResult:[String:JSON],success: Bool, errorC:Error?) in
+                    
+                    
+        //            if(ratingResult.count > 0)
+        //            {
+        //                self.dicRatingList = ratingResult
+        //                self.ratingShow()
+        //
+        //            }
+                    
+                    
+                    
+                    if(result.count > 0)
+                    {
+                        self.dicProductList = result
+                    }
+                    
+                    if(self.dicProductList.count > 0)
+                    {
+                        
+       
+                        self.productNameLbl.text = self.dicProductList["title"]?.string ?? ""
+                        if let wishlist = self.dicProductList["wishlist"]?.string{
+                            if wishlist == "1"{
+                               self.favImgView.image = UIImage(named: "heart-fill")
+                            }
+                            else{
+                                self.favImgView.image = UIImage(named: "fav")
+                            }
+                            
+                        }
+                        self.productNameLbl.numberOfLines = 4
+                        //self.labelDesc.text = self.dicProductList["description"]?.string?.html2String ?? ""
+                        
+                        
+                        
+                        
+                        if(HelperArabic().isArabicLanguage())
+                        {
+                            if let title_ar =  self.dicProductList["title_ar"]?.string
+                            {
+                                if(title_ar.count > 0)
+                                {
+                                    self.productNameLbl.text = title_ar
+                                }
+                                
+                            }
+                            if let description_ar =  self.dicProductList["description_ar"]?.string
+                            {
+                                if(description_ar.count > 0)
+                                {
+                                    //  self.labelDesc.text = description_ar.html2String
+        //                            self.labelDesc.setHTML(html: description_ar + self.htmlfontStyle)
+                                    self.textViewDescriptions.setHTML(html: description_ar)
+                                    self.textViewDescriptions.textColor = .white
+                                    if HelperArabic().isArabicLanguage(){
+                                        self.textViewDescriptions.textAlignment = .right
+                                    }else{
+                                        self.textViewDescriptions.textAlignment = .left
+                                    }
+                                    
+                                }
+                                else
+                                {
+        //                            self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
+                                    
+                                    self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? "") )
+                                    self.textViewDescriptions.textColor = .white
+                                    if HelperArabic().isArabicLanguage(){
+                                        self.textViewDescriptions.textAlignment = .right
+                                    }else{
+                                        self.textViewDescriptions.textAlignment = .left
+                                    }
+                                }
+                            }
+                            else
+                            {
+        //                        self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
+                                
+                                self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? "") )
+                                self.textViewDescriptions.textColor = .white
+                                if HelperArabic().isArabicLanguage(){
+                                    self.textViewDescriptions.textAlignment = .right
+                                }else{
+                                    self.textViewDescriptions.textAlignment = .left
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+        //                    self.labelDesc.setHTML(html:(self.dicProductList["description"]?.string ?? "") + self.htmlfontStyle)
+                            
+                            self.textViewDescriptions.setHTML(html:(self.dicProductList["description"]?.string ?? ""))
+                            self.textViewDescriptions.textColor = .white
+                            if HelperArabic().isArabicLanguage(){
+                                self.textViewDescriptions.textAlignment = .right
+                            }else{
+                                self.textViewDescriptions.textAlignment = .left
+                            }
+                        }
+                        
+                        
+                        if let arrayModelNum = self.dicProductList["model_no"]?.string
+                        {
+                            if(arrayModelNum.count > 0)
+                            {
+                               // self.labelProductCode.text = "\(NSLocalizedString("MSG405", comment: "")): \(arrayModelNum)"
+                                
+                            }
+                            
+                        }
+                        
+                        
+                        
+                        
+                        
+                       
+                        
+                        
+                        print(self.dicProductList)
+                        
+                        if (self.dicProductList["sale_price"]?.string?.count ?? 0 > 0)
+                        {
+                            let sellPriceTemp  = Double(self.dicProductList["sale_price"]?.string ?? "0.0") ?? 0.0
+                            if(sellPriceTemp > 0.0)
+                            {
+                                var tempPrice = 0.0
+                                var basePrice = 0.0
+                                
+                                if(self.currency.uppercased() == "KWD")
+                                {
+                                    tempPrice = Double(self.dicProductList["sale_price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
+                                    basePrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
+                                    
+                                }
+                                else
+                                {
+                                    tempPrice = Double(self.dicProductList["sale_price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
+                                    basePrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
+                                    
+                                }
+                                
+                                if(tempPrice < basePrice)
+                                {
+                                    tempPrice = basePrice - tempPrice
+                                    var sprice = ""
+                                    if(self.currency.uppercased() == "KWD")
+                                    {
+                                        sprice = String(format:"%.3f",Double(tempPrice).roundTo(places: 3) )
+                                    }
+                                    else
+                                    {
+                                        sprice = String(format:"%.2f",Double(tempPrice).roundTo(places: 2) )
+                                        
+                                    }
+                                    let combination = NSMutableAttributedString()
+                                    
+                                    combination.append(self.getSimpleText(price: String(sprice) + " \(self.currency) "))
+                                    
+                                    
+                                    self.leftSalePriceAttributed = self.getStrikeText(price: String(self.dicProductList["price"]?.string ?? "") + " \(self.currency)")
+                                    
+                                    combination.append(self.getStrikeText(price: String(self.dicProductList["price"]?.string ?? "")))
+                                    combination.append(self.getSimpleText(price: " \(self.currency)"))
+                                    self.leftpriceLbl.attributedText = combination
+                                    if(self.currency.uppercased() == "KWD")
+                                    {
+                                        self.leftPowerPrice = Double(tempPrice).roundTo(places: 3)
+                                    }
+                                    else
+                                    {
+                                        self.leftPowerPrice = Double(tempPrice).roundTo(places: 2)
+                                        
+                                    }
+                                }
+                                else
+                                {
+                                    if(self.currency.uppercased() == "KWD")
+                                    {
+                                        self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
+
+                                        self.leftpriceLbl.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
+
+                                    }
+                                    else
+                                    {
+
+                                        self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
+
+                                        self.leftpriceLbl.text = String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
+
+
+                                    }
+                                }
+                                
+                                
+                            }
+                            else
+                            {
+                                if(self.currency.uppercased() == "KWD")
+                                {
+                                    self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
+
+                                    //self.labelLeftPrice.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
+                                    self.leftpriceLbl.text = String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
+
+                                }
+                                else
+                                {
+
+                                    self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
+
+                                    self.leftpriceLbl.text = String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
+
+
+                                }
+
+                            }
+                        }
+                        else
+                            
+                        {
+                            
+                            if(self.currency.uppercased() == "KWD")
+                            {
+                                self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 3) ?? 0.0
+                                
+                                self.leftpriceLbl.text =  String(format:"%.3f",self.leftPowerPrice) + " \(self.currency)"
+                                
+                            }
+                            else
+                            {
+                                
+                                self.leftPowerPrice = Double(self.dicProductList["price"]?.string ?? "0.0")?.roundTo(places: 2) ?? 0.0
+                                
+                                self.leftpriceLbl.text =  String(format:"%.3f", self.leftPowerPrice) + " \(self.currency)"
+                                
+                                
+                            }
+                            
+                        }
+                        
+                        if let offerAvailable = self.dicProductList["offer_name"]?.string
+                        {
+        //                    if(offerAvailable.count > 0)
+        //                    {
+        //                        self.labelOffer.text = offerAvailable
+        //
+        //                        if(HelperArabic().isArabicLanguage())
+        //                        {
+        //
+        //                            if let offerName_ar = self.dicProductList["offer"]?["name_ar"].string
+        //                            {
+        //                                self.labelOffer.text = offerName_ar
+        //                            }
+        //                        }
+        //                        self.labelOffers.isHidden = false
+        //                        self.heightConstraintOfferTitle.constant = 30
+        //                        self.offerHeightConstraint.constant = 30
+        //                    }
+        //                    else
+        //                    {
+        //                        self.labelOffer.text = ""
+        //                        self.labelOffers.isHidden = true
+        //                        self.heightConstraintOfferTitle.constant = 0
+        //                        self.offerHeightConstraint.constant = 0
+        //                    }
+                            
+                            self.productOfferLbl.text = offerAvailable
+                        }
+        //                else
+        //                {
+        //                    self.labelOffer.text = ""
+        //                    self.labelOffers.isHidden = true
+        //                    self.heightConstraintOfferTitle.constant = 0
+        //                    self.offerHeightConstraint.constant = 0
+        //                }
+                        
+                        if let deal_otd = self.dicProductList["deal_otd"]?.stringValue,deal_otd == "1"{
+                                           if let deal_otd_discount = self.dicProductList["deal_otd_discount"]?.stringValue{
+                                               self.productOfferLbl.text = NSLocalizedString("MSG442", comment: "") + " " + deal_otd_discount + " KWD"
+                                           }
+
+                                       }
+                        
+                        
+                        
+                        
+                        self.buttonAddCart.setTitleColor(.white, for: .normal)
+                        
+                        
+                        if let strQuantity = self.dicProductList["quantity"]?.string
+                        {
+                            
+                            if((Int(strQuantity) ?? 0) < 1 || strQuantity.count < 1)
+                            {
+                                
+                                self.buttonAddCart.setTitle( NSLocalizedString("MSG195", comment: ""), for: .normal)
+                                
+                                self.buttonAddCart.isUserInteractionEnabled = false
+                                self.arrayQunatity.removeAll()
+                                self.pickerView.reloadAllComponents()
+                               // self.labelLeftQty.text = "0"
+                                self.buttonAddCart.setTitleColor(.white, for: .normal)
+                                
+                                
+                            }
+                            else if(Int(strQuantity) ?? 0 > 0)
+                            {
+                                self.arrayQunatity.removeAll()
+                                
+                                
+                                
+                                let countQunt = Int(strQuantity) ?? 0
+                                if(countQunt > 10)
+                                {
+                                    for indexT in 0..<10
+                                    {
+                                        self.arrayQunatity.insert(indexT + 1, at: self.arrayQunatity.count)
+                                        
+                                    }
+                                }
+                                else
+                                {
+                                    for indexT in 0..<countQunt
+                                    {
+                                        self.arrayQunatity.insert(indexT + 1, at: self.arrayQunatity.count)
+                                        
+                                    }
+                                }
+                                
+        //                        if( self.arrayQunatity.count > 0)
+        //                        {
+        //                            self.labelLeftQty.text = String(self.arrayQunatity[0])
+        //                        }
+        //                        else
+        //                        {
+        //                            self.labelLeftQty.text = "0"
+        //                        }
+                                if let strStockFlag = self.dicProductList["stock_flag"]?.string
+                                    
+                                {
+                                    if((Int(strStockFlag) ?? 0) < 1 || strStockFlag.count < 1)
+                                    {
+                                        self.buttonAddCart.setTitle( NSLocalizedString("MSG195", comment: ""), for: .normal)
+                                        self.buttonAddCart.setTitleColor(.white, for: .normal)
+                                        
+                                        self.buttonAddCart.isUserInteractionEnabled = false
+                                        self.arrayQunatity.removeAll()
+                                        self.pickerView.reloadAllComponents()
+                                       // self.labelLeftQty.text = "0"
+                                    }
+                                }
+                                self.pickerView.reloadAllComponents()
+                                
+                            }
+                        }
+                        
+                        
+                        // self.viewWillLayoutSubviews()
+                        
+                        
+                        //                let stringVariation = ProductDetailsModel.sharedInstance.arrayProductList[0].variations
+                        //                if((stringVariation?.count) ?? 0 > 0)
+                        //                {
+                        //                    self.arrayShade = stringVariation?.components(separatedBy: ",") ?? [String]()
+                        //                    if(self.arrayShade.count > 0)
+                        //                    {
+                        //                    self.textFieldSelectShade.text = self.arrayShade[0]
+                        //                    }
+                        //                    else
+                        //                    {
+                        //                        self.textFieldSelectShade.text = ""
+                        //                    }
+                        //                }
+                        
+                        self.setSlider()
+                        self.pickerView.reloadAllComponents()
+                        if let img = self.dicProductList["product_image"]?.stringValue{
+                            let imgStr = KeyConstant.kImageBaseProductURL + img
+                            let urlString = imgStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+
+                            let url = URL(string: urlString!)
+                            let processor = DownsamplingImageProcessor(size:  (self.egamesImgView.frame.size))
+                                                  >> RoundCornerImageProcessor(cornerRadius: 0)
+                            self.egamesImgView.kf.indicatorType = .none
+                            self.egamesImgView.kf.setImage(
+                                                  with: url,
+                                                  placeholder: UIImage(named: "no_image"),
+                                                  options: [
+                                                      .processor(processor),
+                                                      .scaleFactor(UIScreen.main.scale),
+                                                      .transition(.fade(1)),
+                                                      .cacheOriginalImage
+                                              ])
+                            
+                        }
+                       
+                        
+                    }
+                    if(relatedArray.count > 0)
+                    {
+                        
+                        self.arrayRelatedProductList = relatedArray
+                        self.itemWidth = 0.0
+                        self.viewDidLayoutSubviews()
+                        
+                    }
+                    
+                    
+                    
+                })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1051,65 +1019,29 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
 //        }
 //    }
     func reloadDataSelected() {
-//
-//
-//
-//
+
 //        print(KeyConstant.sharedAppDelegate.getUserId())
-//
-//        if(APITypeAction.count > 0 && paramOfAction.count > 0)
-//        {
-//            if(APITypeAction == KeyConstant.APIAddWishlist)
-//            {
-//                let productId = paramOfAction["product_id"]
-//                var params: [String:String]?
-//                if(typeCart == arraTypeCart[0])
-//                {
-//
-//
-//                    params = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":paramOfAction["product_id"] ?? "","quantity":labelLeftQty.text ?? "","shade":""]
-//
-//                    if(self.buttonSelectPower.isHidden == false)
-//                    {
-//                        params?["left_eye_power"] = String(leftPower)
-//                        params?["right_eye_power"] = String(rightPower)
-//                    }
-//                }
-//                else
-//                {
-//                    params = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":paramOfAction["product_id"] ?? "","quantity":"1","shade":"","left_eye_power":paramOfAction["left_eye_power"] ?? "","right_eye_power":paramOfAction["right_eye_power"] ?? ""]
-//                }
-//                WishListViewModel().addToWishlist(vc: self, param: params!) { (isDone:Bool, error:Error?) in
-//
-//                    self.APITypeAction = ""
-//                    self.paramOfAction.removeAll()
-//                    self.showFavIcon()
-//
-//
-//                }
-//            }
-//
-//            else if(APITypeAction == KeyConstant.APIAddCart)
-//            {
-//                self.addToCart()
-//
-//            }
-//            else
-//            {
-//                self.paramOfAction.removeAll()
-//                self.APITypeAction = ""
-//
-//            }
-//        }
-//        else
-//        {
-//            self.paramOfAction.removeAll()
-//            self.APITypeAction = ""
-//
-//        }
-//
-//
-//
+        if(APITypeAction.count > 0 && paramOfAction.count > 0)
+        {
+            if(APITypeAction == KeyConstant.APIAddWishlist)
+            {
+              
+                WishListViewModel().addToWishlist(vc: self, param: paramOfAction) { (isDone:Bool, error:Error?) in
+
+                    self.APITypeAction = ""
+                    self.paramOfAction.removeAll()
+                   // self.showFavIcon()
+
+                    self.productDetialApiCall()
+
+                }
+            }
+
+        }
+        
+
+
+
         showCartCount()
     }
     
@@ -2117,16 +2049,7 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
 //
 //    }
 //
-//    @IBAction func buttonFav(_ sender: UIButton) {
-//
-//
-//        paramOfAction = ["product_id":productId]
-//        APITypeAction = KeyConstant.APIAddWishlist
-//        self.reloadDataSelected()
-//
-//
-//
-//    }
+
     @IBAction func buttonSearch(_ sender: Any) {
         KeyConstant.sharedAppDelegate.showSearchScreen(vc: self)
 
@@ -2137,6 +2060,25 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
         self.present(myCartVC, animated: false, completion: nil)
 
     }
+    
+    
+    @IBAction func favBtnClicked(_ sender: UIButton) {
+//
+//                    let paramOfAction: [String:String] = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":productId]
+//
+//                    WishListViewModel().addToWishlist(vc: self, param: paramOfAction) { (isDone:Bool, error:Error?) in
+//
+//
+//        //                WishListViewModel().getAllWishlistProduct(vc: self, completionHandler: { (success: Bool, errorC:Error?) in
+//                            self.displayProductList()
+//        //                })
+//                    }
+        
+                paramOfAction = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":productId]
+                APITypeAction = KeyConstant.APIAddWishlist
+                self.reloadDataSelected()
+    }
+    
 
 //    @IBAction func buttonActionBuyNowCart(_ sender: UIButton) {
 //
@@ -2288,6 +2230,14 @@ extension ProductDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource
         {
             let dic = self.arrayRelatedProductList[indexPath.row]
 
+            if dic["wishlist"] == "1"{
+                cell.favImgView.image = UIImage(named: "heart-fill")
+            }else{
+               cell.favImgView.image = UIImage(named: "fav")
+            }
+            cell.favBtn.tag = indexPath.row
+            cell.favBtn.addTarget(self, action: #selector(buttonFav1(sender:)), for: .touchUpInside)
+            
             cell.productNameLbl.text = dic["title"].string ?? ""
             // cell.labelProductDetails.text = dic["description"].string?.html2String ?? ""
            // cell.labelProductDetails.setHTML1(html:(dic["description"].string ?? "") + self.htmlfontStyle)
@@ -2591,29 +2541,10 @@ extension ProductDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource
 
     @objc func buttonFav1(sender:UIButton)
     {
-        var colorDefault = ""
-
-        let stringVariation = self.arrayRelatedProductList[sender.tag]["variations"].string ?? ""
-
-        if((stringVariation.count) ?? 0 > 0)
-        {
-            let arrayShade = stringVariation.components(separatedBy: ",") ?? [String]()
-            if(arrayShade.count > 0)
-            {
-                colorDefault = arrayShade[0]
-            }
-        }
-
-        paramOfAction = ["product_id":self.arrayRelatedProductList[sender.tag]["id"].string ?? "","shade":colorDefault]
-
-        if((self.arrayRelatedProductList[sender.tag]["power"]["start_range"].string?.count) ?? 0 > 0)
-        {
-            paramOfAction["left_eye_power"] = "0.0"
-            paramOfAction["right_eye_power"] = "0.0"
-        }
-
-
-       // APITypeAction = KeyConstant.APIAddWishlist
+        
+        let productId = self.arrayRelatedProductList[sender.tag]["id"].stringValue
+       paramOfAction = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":productId]
+       APITypeAction = KeyConstant.APIAddWishlist
         self.reloadDataSelected()
 
     }

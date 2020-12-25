@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,6 +25,14 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noImage" translatesAutoresizingMaskIntoConstraints="NO" id="8JZ-SJ-zCw">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="338"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4l-Qe-m5W">
+                        <rect key="frame" x="160" y="8" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="9FF-7B-Wh7"/>
+                            <constraint firstAttribute="height" constant="24" id="NOd-92-tUW"/>
+                        </constraints>
+                        <state key="normal" image="fav"/>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xs-lP-tMO" customClass="PaddingLabel" customModule="E_Games_Store" customModuleProvider="target">
                         <rect key="frame" x="16" y="280" width="168" height="18"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,7 +88,7 @@
                             <constraint firstAttribute="trailing" secondItem="7Vs-4z-qkv" secondAttribute="trailing" constant="2" id="yGy-c9-KSw"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNU-oZ-ZhV">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNU-oZ-ZhV">
                         <rect key="frame" x="91" y="306" width="109" height="32"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boS-XR-q61" customClass="PaddingLabel" customModule="E_Games_Store" customModuleProvider="target">
@@ -97,7 +105,6 @@
                     </label>
                 </subviews>
             </view>
-            <viewLayoutGuide key="safeArea" id="tXZ-y7-x14"/>
             <constraints>
                 <constraint firstItem="cNU-oZ-ZhV" firstAttribute="height" secondItem="Css-7N-yko" secondAttribute="height" id="2hR-5f-MIU"/>
                 <constraint firstAttribute="bottom" secondItem="Css-7N-yko" secondAttribute="bottom" id="5wN-ES-3fz"/>
@@ -110,6 +117,7 @@
                 <constraint firstAttribute="trailing" secondItem="Css-7N-yko" secondAttribute="trailing" id="QnM-5V-uP1"/>
                 <constraint firstItem="Css-7N-yko" firstAttribute="width" secondItem="gtr-ld-ZJb" secondAttribute="width" multiplier="1.2" id="RKR-Mo-F3w"/>
                 <constraint firstItem="0xs-lP-tMO" firstAttribute="leading" secondItem="rbg-mY-ag6" secondAttribute="leading" constant="16" id="TYl-YP-jlV"/>
+                <constraint firstAttribute="trailing" secondItem="y4l-Qe-m5W" secondAttribute="trailing" constant="16" id="U7D-EI-KuW"/>
                 <constraint firstItem="gtr-ld-ZJb" firstAttribute="top" secondItem="boS-XR-q61" secondAttribute="bottom" constant="4" id="V85-Xa-D6h"/>
                 <constraint firstItem="cNU-oZ-ZhV" firstAttribute="centerX" secondItem="Css-7N-yko" secondAttribute="centerX" id="Wm0-gC-kxq"/>
                 <constraint firstItem="gtr-ld-ZJb" firstAttribute="leading" secondItem="rbg-mY-ag6" secondAttribute="leading" id="Zts-uR-DmT"/>
@@ -118,8 +126,10 @@
                 <constraint firstAttribute="trailing" secondItem="0xs-lP-tMO" secondAttribute="trailing" constant="16" id="hza-sc-rOO"/>
                 <constraint firstAttribute="bottom" secondItem="gtr-ld-ZJb" secondAttribute="bottom" id="ic5-AW-G18"/>
                 <constraint firstItem="8JZ-SJ-zCw" firstAttribute="top" secondItem="rbg-mY-ag6" secondAttribute="top" id="lrk-ds-xje"/>
+                <constraint firstItem="y4l-Qe-m5W" firstAttribute="top" secondItem="rbg-mY-ag6" secondAttribute="top" constant="8" id="mrN-gf-sBJ"/>
                 <constraint firstItem="cNU-oZ-ZhV" firstAttribute="width" secondItem="Css-7N-yko" secondAttribute="width" id="nUb-D0-gFd"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="tXZ-y7-x14"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                     <real key="value" value="4"/>
@@ -136,6 +146,7 @@
                 <outlet property="addtoCartBtn" destination="cNU-oZ-ZhV" id="eyn-a2-8Qd"/>
                 <outlet property="addtoCartLbl" destination="7Vs-4z-qkv" id="iSg-YQ-lHq"/>
                 <outlet property="addtoCartView" destination="Css-7N-yko" id="xrI-Th-5jo"/>
+                <outlet property="favBtn" destination="y4l-Qe-m5W" id="UyN-Fx-9VG"/>
                 <outlet property="imageViewProduct" destination="8JZ-SJ-zCw" id="d0n-v2-MlE"/>
                 <outlet property="labelProductName" destination="0xs-lP-tMO" id="myG-91-cpr"/>
                 <outlet property="offerPriceLbl" destination="boS-XR-q61" id="sbm-kS-EhR"/>
@@ -144,15 +155,9 @@
             <point key="canvasLocation" x="140.80000000000001" y="126.83658170914543"/>
         </collectionViewCell>
     </objects>
-    <designables>
-        <designable name="0xs-lP-tMO">
-            <size key="intrinsicContentSize" width="102" height="18"/>
-        </designable>
-        <designable name="boS-XR-q61"/>
-        <designable name="gtr-ld-ZJb"/>
-    </designables>
     <resources>
         <image name="Group 42" width="23" height="23"/>
+        <image name="fav" width="30" height="30"/>
         <image name="noImage" width="1500" height="944"/>
     </resources>
 </document>

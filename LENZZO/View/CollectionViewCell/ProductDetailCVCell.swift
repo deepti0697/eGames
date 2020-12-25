@@ -19,7 +19,9 @@ class ProductDetailCVCell: UICollectionViewCell {
     @IBOutlet weak var addToCartBtn: UIButton!
     @IBOutlet weak var viewDetailBtn: UIButton!
     
+    @IBOutlet weak var favImgView: UIImageView!
     
+    @IBOutlet weak var favBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

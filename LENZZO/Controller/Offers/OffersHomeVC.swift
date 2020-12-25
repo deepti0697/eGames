@@ -584,7 +584,17 @@ extension OffersHomeVC:UICollectionViewDelegateFlowLayout,UICollectionViewDelega
                 cell.addtoCartBtn.isUserInteractionEnabled = true
                 cell.addtoCartBtn.setTitleColor(UIColor(hexString: "8BC6E9"), for: .normal)
     
+                cell.favBtn.tag = indexPath.item
+                cell.favBtn.addTarget(self, action: #selector(favBtnClicked(sender:)), for: .touchUpInside)
+                cell.isUserInteractionEnabled = true
     
+                 if let wishlist = dic.wishlist{
+                                   if wishlist == "1"{
+                                       cell.favBtn.setImage(UIImage(named: "heart-fill"), for: .normal)
+                                   }else{
+                                       cell.favBtn.setImage(UIImage(named: "fav"), for: .normal)
+                                   }
+                               }
                 if(dic.cate_id == "2")
                 {
                    // cell.addtoCartLbl.setTitle(NSLocalizedString("MSG432", comment: ""), for: .normal)
@@ -720,6 +730,34 @@ extension OffersHomeVC:UICollectionViewDelegateFlowLayout,UICollectionViewDelega
                 
             //}
         }
+    
+    @objc func favBtnClicked(sender:UIButton){
+        
+        
+                   let paramOfAction: [String:String] = ["user_id":KeyConstant.sharedAppDelegate.getUserId(),"product_id":OfferModel.sharedInstance.arrayOfferList[sender.tag].id]
+           
+                   WishListViewModel().addToWishlist(vc: self, param: paramOfAction) { (isDone:Bool, error:Error?) in
+           
+           
+              BrandModelview().getOfferBrandInfo(vc: self, offerType: "", completionHandler: { (success: Bool, errorC:Error?) in
+                   if(OfferModel.sharedInstance.arrayOfferList.count == 0)
+                   {
+                       self.labelNotFound.isHidden = false
+                   }
+                   else
+                   {
+                       self.labelNotFound.isHidden = true
+                       DispatchQueue.main.async {
+                           self.offerCollectionView.reloadData()
+                       }
+                   }
+      
+                   
+               })
+
+                   }
+        
+    }
         
         
         @objc func viewDetailBtnTapped(sender:UIButton)

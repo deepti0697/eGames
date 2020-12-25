@@ -186,9 +186,8 @@ class PaymentOptionVC: UIViewController {
     }
     func getCountryLanguage()
     {
-        
         MBProgress().showIndicator(view: self.view)
-        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: [:], completionHandler: { (result: [String:Any], err:Error?) in
+        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: ["only_selected_countries":"1","cart_id":cartIds], completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             DispatchQueue.main.async {
                 MBProgress().hideIndicator(view: self.view)

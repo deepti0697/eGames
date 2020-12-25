@@ -196,11 +196,13 @@ class ProductListModel
         var offer_name:String!
         
         var start_range:String!
+        var wishlist:String!
         
         
         init(dictData:[String:JSON])
         {
             self.title = dictData["title"]?.string ?? ""
+            self.wishlist = dictData["wishlist"]?.string ?? ""
             self.description = dictData["description"]?.string ?? ""
             if let offerName = dictData["offer_name"]?.string
             {
