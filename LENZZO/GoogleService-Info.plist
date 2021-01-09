@@ -3,34 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>962491064340-kavr8qd0no7ag41oo96pjo42o8jhh2gs.apps.googleusercontent.com</string>
+	<string>106933805542-3kc5vale66u6mu8gt10u0jjtbddtac2t.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.962491064340-kavr8qd0no7ag41oo96pjo42o8jhh2gs</string>
+	<string>com.googleusercontent.apps.106933805542-3kc5vale66u6mu8gt10u0jjtbddtac2t</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDn32RXwJByM5Aaerzb5-MD7Gl9mRnkneQ</string>
+	<string>AIzaSyAjTPUru2juWBArRAbGcUopvcObVPwZW9c</string>
 	<key>GCM_SENDER_ID</key>
-	<string>962491064340</string>
+	<string>106933805542</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.rg.EGames</string>
 	<key>PROJECT_ID</key>
-	<string>e-games-store</string>
+	<string>egames-store</string>
 	<key>STORAGE_BUCKET</key>
-	<string>e-games-store.appspot.com</string>
+	<string>egames-store.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:962491064340:ios:8f5c61208cacefa793c701</string>
-	<key>DATABASE_URL</key>
-	<string>https://e-games-store.firebaseio.com</string>
+	<string>1:106933805542:ios:76c5e6f726c4caaaf2b627</string>
 </dict>
 </plist>

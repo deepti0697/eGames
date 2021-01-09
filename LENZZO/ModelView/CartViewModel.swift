@@ -138,6 +138,7 @@ class CartViewModel
             if(statusCode == "success")
             {
                 
+                print(json["response"]["usercart_Array"]["usercart"].array)
                 
                 completionHandler(json["response"]["usercart_Array"]["usercart"].array ?? [JSON](),String(json["response"]["usercart_Array"]["totalcount"].int ?? 0) ,err)
                 

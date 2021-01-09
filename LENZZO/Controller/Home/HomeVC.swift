@@ -331,7 +331,7 @@ extension HomeVC:UITableViewDelegate, UITableViewDataSource
             ])
             attributedString.addAttributes([
               .font: UIFont(name: FontLocalization.medium.strValue, size: 17.0)!,
-              .foregroundColor: AppColors.SelcetedColor
+              .foregroundColor: UIColor(white: 1.0, alpha: 1.0)
             ], range: NSRange(location: 0, length: 4))
             cell.labelCategoryName.attributedText = attributedString
             cell.collectionView.reloadData()
@@ -350,7 +350,7 @@ extension HomeVC:UITableViewDelegate, UITableViewDataSource
             
             //used for top brands red color ,.foregroundColor: UIColor(red: 248.0 / 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
             attributedString.addAttributes([
-              .font: UIFont(name: FontLocalization.medium.strValue, size: 17.0)!,.foregroundColor: UIColor(red: 248.0 / 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+              .font: UIFont(name: FontLocalization.medium.strValue, size: 17.0)!,.foregroundColor: UIColor(white: 1.0, alpha: 1.0)
             ], range: NSRange(location: 0, length: 3))
             cell.labelCategoryName.attributedText = attributedString
             cell.collectionView.reloadData()

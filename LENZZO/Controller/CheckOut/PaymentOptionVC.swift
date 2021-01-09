@@ -187,7 +187,9 @@ class PaymentOptionVC: UIViewController {
     func getCountryLanguage()
     {
         MBProgress().showIndicator(view: self.view)
-        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: ["only_selected_countries":"1","cart_id":cartIds], completionHandler: { (result: [String:Any], err:Error?) in
+        
+        let option = KeyConstant.user_Default.value(forKey: "option") as! String
+        WebServiceHelper.sharedInstanceAPI.hitPostAPI(urlString: KeyConstant.APIGetCountryList, params: ["only_selected_countries":"1","cart_id":cartIds,"option":option], completionHandler: { (result: [String:Any], err:Error?) in
             print(result)
             DispatchQueue.main.async {
                 MBProgress().hideIndicator(view: self.view)
@@ -380,7 +382,9 @@ class PaymentOptionVC: UIViewController {
             subTotalTemp = String(format:"%.2f",self.subTotal)
             grandTotalTemp = String(format:"%.2f",self.grandTotal)
         }
-        var param:[String:String] = ["user_id":user_id,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
+        
+        let optionValue = KeyConstant.user_Default.value(forKey: "option") as! String
+        var param:[String:String] = ["user_id":user_id,"option":optionValue,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
         if self.headerIndex != nil{
        
 
@@ -618,10 +622,11 @@ class PaymentOptionVC: UIViewController {
         
             grandTotal = String(format:"%.2f",self.grandTotal)
         }
-       
-
+        let optionValue = KeyConstant.user_Default.value(forKey: "option") as! String
+        
         let parameters = [
             "amount":grandTotal,
+            "option":optionValue,
             "currency": currency,
             "threeDSecure": true,
             "save_card": false,

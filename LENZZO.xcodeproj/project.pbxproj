@@ -133,7 +133,6 @@
 		18FB04312319259F009B0919 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FB04302319259F009B0919 /* SignupViewModel.swift */; };
 		35588417241B819C00F847A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35588416241B819B00F847A1 /* ViewController.swift */; };
 		358326DF241A312D006A766A /* ArgAppUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358326DE241A312B006A766A /* ArgAppUpdater.swift */; };
-		930227682531AD0F00BCA90D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 930227672531AD0D00BCA90D /* GoogleService-Info.plist */; };
 		932227842491168400CC2B70 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932227832491168400CC2B70 /* LoginVC.swift */; };
 		93375B7924B84572001156DD /* Cairo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93375B7324B84571001156DD /* Cairo-ExtraLight.ttf */; };
 		93375B7A24B84572001156DD /* Cairo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93375B7424B84571001156DD /* Cairo-SemiBold.ttf */; };
@@ -143,6 +142,7 @@
 		93375B7E24B84572001156DD /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93375B7824B84572001156DD /* Cairo-Bold.ttf */; };
 		93375B8024B84A42001156DD /* FontLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93375B7F24B84A42001156DD /* FontLocalization.swift */; };
 		9339D8B024949B67002F2607 /* ProdcutListTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9339D8AF24949B67002F2607 /* ProdcutListTVCell.swift */; };
+		933DDD2325A84DA000D41B0E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 933DDD2225A84DA000D41B0E /* GoogleService-Info.plist */; };
 		933E7ADE2497AAFE00C75674 /* BrandSearchEmptyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933E7ADD2497AAFD00C75674 /* BrandSearchEmptyVC.swift */; };
 		933EB3DA249B44C3004CCC38 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 933EB3C8249B44C1004CCC38 /* Lato-Semibold.ttf */; };
 		933EB3DD249B44C3004CCC38 /* Lato-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 933EB3CB249B44C1004CCC38 /* Lato-Medium.ttf */; };
@@ -333,7 +333,6 @@
 		6E046640D2C53EE799A41724 /* Pods_LENZZO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LENZZO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7341D8CFDEF003FBA25906DF /* Pods-LENZZOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LENZZOTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LENZZOTests/Pods-LENZZOTests.release.xcconfig"; sourceTree = "<group>"; };
 		8074F429BC7D452CDD77A0B5 /* Pods-LENZZOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LENZZOUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LENZZOUITests/Pods-LENZZOUITests.release.xcconfig"; sourceTree = "<group>"; };
-		930227672531AD0D00BCA90D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		932227832491168400CC2B70 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		93375B7324B84571001156DD /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
 		93375B7424B84571001156DD /* Cairo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -343,6 +342,7 @@
 		93375B7824B84572001156DD /* Cairo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cairo-Bold.ttf"; sourceTree = "<group>"; };
 		93375B7F24B84A42001156DD /* FontLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLocalization.swift; sourceTree = "<group>"; };
 		9339D8AF24949B67002F2607 /* ProdcutListTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProdcutListTVCell.swift; path = LENZZO/View/TableViewCell/ProdcutListTVCell.swift; sourceTree = SOURCE_ROOT; };
+		933DDD2225A84DA000D41B0E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		933E7ADD2497AAFD00C75674 /* BrandSearchEmptyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandSearchEmptyVC.swift; sourceTree = "<group>"; };
 		933EB3C8249B44C1004CCC38 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		933EB3CB249B44C1004CCC38 /* Lato-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Medium.ttf"; sourceTree = "<group>"; };
@@ -646,10 +646,10 @@
 				185F0F4C2302D420007101A5 /* Utility */,
 				185F0F6D2302DD36007101A5 /* View */,
 				18A9B4532302869A0020B7C8 /* Assets.xcassets */,
-				930227672531AD0D00BCA90D /* GoogleService-Info.plist */,
 				93E2C78E24FE2BA200994C54 /* gauri.mp4 */,
 				18B8FF2423A3B12C0055E2A3 /* New Group */,
 				18A9B4582302869A0020B7C8 /* Info.plist */,
+				933DDD2225A84DA000D41B0E /* GoogleService-Info.plist */,
 				18A9B4502302868F0020B7C8 /* LENZZO.xcdatamodeld */,
 				183F5822238BE30B0077B674 /* Localizable.strings */,
 			);
@@ -1089,7 +1089,7 @@
 				185F0F912302ED5A007101A5 /* Futura-Bold-font.ttf in Resources */,
 				185F0F8D2302ED5A007101A5 /* Futura-Heavy-Italic-font.ttf in Resources */,
 				933EB3E4249B44C3004CCC38 /* Lato-Black.ttf in Resources */,
-				930227682531AD0F00BCA90D /* GoogleService-Info.plist in Resources */,
+				933DDD2325A84DA000D41B0E /* GoogleService-Info.plist in Resources */,
 				18622BD723B09FE30073A4DD /* newloading.gif in Resources */,
 				18622BD523B092270073A4DD /* 833.gif in Resources */,
 				183F5820238BE30B0077B674 /* Localizable.strings in Resources */,
@@ -1539,7 +1539,7 @@
 				CODE_SIGN_ENTITLEMENTS = LENZZO/LENZZO.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1577,7 +1577,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames;
 				PRODUCT_NAME = "E-Games Store";
 				PROVISIONING_PROFILE_SPECIFIER = EgamesProProfileDev;
@@ -1594,7 +1594,7 @@
 				CODE_SIGN_ENTITLEMENTS = LENZZO/LENZZO.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1632,7 +1632,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames;
 				PRODUCT_NAME = "E-Games Store";
 				PROVISIONING_PROFILE_SPECIFIER = EgamesProProfileDev;
@@ -1732,7 +1732,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
@@ -1747,7 +1747,7 @@
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NottificationExtensionProvioningProfile;
+				PROVISIONING_PROFILE_SPECIFIER = oneExtensionProProfileLive;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1759,7 +1759,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
@@ -1774,7 +1774,7 @@
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = NottificationExtensionProvioningProfile;
+				PROVISIONING_PROFILE_SPECIFIER = oneExtensionProProfileLive;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

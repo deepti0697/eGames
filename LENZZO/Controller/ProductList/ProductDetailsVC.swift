@@ -211,7 +211,7 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
               collectionView.contentInsetAdjustmentBehavior = .always
         columnLayout.scrollDirection = .horizontal
         collectionView.isScrollEnabled = true
-        let attributedString = NSMutableAttributedString(string: "RELATED PRODUCTS".uppercased(), attributes: [
+        let attributedString = NSMutableAttributedString(string: NSLocalizedString("MSG449", comment: "").uppercased(), attributes: [
             .font: UIFont(name: FontLocalization.medium.strValue, size: 14.0)!,
           .foregroundColor: UIColor(white: 1.0, alpha: 1.0)
         ])
@@ -234,6 +234,13 @@ class ProductDetailsVC: UIViewController, UITextFieldDelegate,DelegatePowerSelec
                 
                 arrayRelatedProductList.removeAll()
                 dicProductList.removeAll()
+                self.textViewDescriptions.text = ""
+        self.productNameLbl.text = ""
+        self.leftpriceLbl.text = ""
+        self.arrayQunatity.removeAll()
+        self.productOfferLbl.text = ""
+        self.egamesImgView.image = UIImage(named: "no_image")
+        
               //  self.showPower()
                 
                 ProductDetailsViewModel().getProductDetailsJSON(vc: self, productId: productId, completionHandler: { (result:[String:JSON], relatedArray:[JSON],ratingResult:[String:JSON],success: Bool, errorC:Error?) in

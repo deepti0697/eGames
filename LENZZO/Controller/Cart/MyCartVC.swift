@@ -70,7 +70,7 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
     var user_id = ""
     var guestCheckoutID = String()
     var isFromGuestLogin = Bool()
-    
+    var isFreeDelivery = "yes"
     override func viewDidLoad() {
         super.viewDidLoad()
         if let guest = KeyConstant.user_Default.value(forKey: KeyConstant.kCheckoutGuestId) as? String
@@ -114,7 +114,7 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
         
         
         self.view.addGestureRecognizer(swipeRight)
-        
+        KeyConstant.user_Default.setValue("", forKey: "option")
         
         getCartList()
         
@@ -472,6 +472,16 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
                     
                     
                     self.totalPrice = self.totalPrice +  self.getTotalPriceEachCartDouble(dictData: self.arrayData[ind].dictionary!)
+                    
+                    let dataDic = self.arrayData[ind].dictionary!
+                    if let childArr = dataDic["child"]?.arrayValue{
+                        let free_delivery = childArr[0]["free_delivery"].stringValue
+                                           if free_delivery == "0" || free_delivery == ""{
+                                               self.isFreeDelivery = "no"
+                                           }
+                    }
+                   
+                    
                     print("dsfdsf\(self.totalPrice)")
                     //}
                     //                        var offer_flag = ""
@@ -501,7 +511,9 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
                     
                 }
                 
-                
+                if self.isFreeDelivery == "yes"{
+                    self.showActionSheetForFreeDelivery()
+                }
                 
                 
             }
@@ -531,6 +543,54 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
         
         
         
+    }
+    
+    
+    func showActionSheetForFreeDelivery(){
+        let alertView = UIAlertController(title: NSLocalizedString("MSG31", comment: "").uppercased(), message: "", preferredStyle: .actionSheet)
+        let msgFont = [NSAttributedString.Key.font: UIFont(name: FontLocalization.medium.strValue, size: 15.0)!]
+        let msgAttrString = NSMutableAttributedString(string: NSLocalizedString("MSG446", comment: ""), attributes: msgFont)
+        alertView.setValue(msgAttrString, forKey: "attributedMessage")
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (alert) in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let deliveryAction = UIAlertAction(title: NSLocalizedString("MSG448", comment: ""), style: .default) { (alert) in
+            self.whatsappOrDeliveryAPiCall(delivery: true, whatsapp: false)
+            
+        }
+        
+        let whatsappAction = UIAlertAction(title: NSLocalizedString("MSG447", comment: ""), style: .default) { (alert) in
+                   
+            self.whatsappOrDeliveryAPiCall(delivery: false, whatsapp: true)
+               }
+        
+        whatsappAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+        alertView.addAction(whatsappAction)
+        
+        deliveryAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+        alertView.addAction(deliveryAction)
+        
+        cancelAction.setValue(AppColors.SelcetedColor, forKey: "titleTextColor")
+        alertView.addAction(cancelAction)
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
+    
+    func whatsappOrDeliveryAPiCall(delivery:Bool,whatsapp:Bool){
+        
+        var option = ""
+        if delivery == true{
+            option = "delivery"
+        }
+        if whatsapp == true{
+            option = "whatsapp"
+        }
+        
+       
+        KeyConstant.user_Default.setValue(option, forKey: "option")
     }
     
     func recheckCartItmes()

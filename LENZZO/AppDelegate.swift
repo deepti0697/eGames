@@ -17,15 +17,40 @@ import MFSDK
 
 //K1ll3r145789
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate, OSPermissionObserver, OSSubscriptionObserver {
+class AppDelegate: UIResponder, UIApplicationDelegate, OSPermissionObserver, OSSubscriptionObserver {
 
     var window: UIWindow?
     var navCon:UINavigationController?
 
+    let gcmMessageIDKey = "gcm.message_id"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
          self.setInitialRootToPlayVideo()
         self.setStatusBarColor()
+        
+        FirebaseApp.configure()
+        
+       if #available(iOS 10.0, *) {
+          // For iOS 10 display notification (sent via APNS)
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+            UNUserNotificationCenter.current().delegate = self
+            Messaging.messaging().delegate = self
+            
+            application.registerForRemoteNotifications()
+
+
+        } else {
+          let settings: UIUserNotificationSettings =
+          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+
+    
+        
         // set up your MyFatoorah Merchant details
                        let directPaymentToken = "qrz8Areo9E4bUBTrVFjfGGsWw-b5vSwoljdj1ZLX15dR5k-eHvHH_FjtqUZ5AT2IuLnjb6hbfM1Ee2h8jVNjY0ZzxIgQ3nBKFWsQ9MWk6DOXzjJwFG0i2O3NS-zwFgFYvUvFHQRwon0GTLl_qywRhvojuKwg3wJfVkzpK9DRNb52IACMwqzrpIR3IDzO6jeh2uhelQhGKdL6c23ohRA7fXx7PB5W-6xjjWAspMJHR1N1jKoD8kA5k15JWWM4uPgcqX90bMaWwZWFg1Vdq9Fpdy8-VK4fQQWPtijzDJMWKJ7Nkx-XQGP7NVPYM-5MMSYNZYwpPPJnOWA61f3-lPapozLrv2kCjQG91Z0RGsTrCTJt1wxPQUU9eyyN4_Gt0s7XzU1t90WlcyUJ4khSCCPeOiPK3D6rYGDLZxYL-DARoF5fhg071OXTvviFAAiBcbfBwVZMXUOwPCC__be_FVOdaVkoAbwJRPWuq2pqfMFKotX2rLrKdnnsI92Hohb7nuq6Hu14SNN5AjgqhoMhsEi8iVj0L57IW9WHPxkNWoSgQYkphanQh32AD4xDG2HDeeSAcLXeIeU7tz0rsg8jAAhNP8wGHnoQFDgCJj5pwvHDn184lkpHyrZVQBtU9o-4iOWcVncdxVubetINdUbKnHm147k96FnvvptGIbKUj75cDmTDT7bYuX9K0AWL8iPouHj63RfoMg"
               // let token = "jc8whj0GPUKu7MlnXCum7x832rqFtKryOlvEXj0trVo4f4rWDnFjVSKRIa6FUOhNhVi2BMTGVDCgYtnPM_aX_u8umRqAlaWIrP-jya7LkspmAkYOO3lO4HfilFe2gma6_2wG5h30DFAJ_GGd02ahXn2U6QZ6bRyRWbPG2_w_2f_s32eMQTYQZyVrG6-p5W4Wu-7PbAcRDwF5upYWnC0aDK-6GeFljyx5dBc0n4heu53onn9OtG10cqap90Nb7bgFzDk9Pdy4GPfeqmLz5HNdvJJyr-YKyqMnvaXOay5hHUVWZQ5ev3y0mjt9AQsG3AWCagxkTthwF2NuJAtqgCS8iz45gBi39s0StrMmBzf99i82QMHkL13cyaYt2hLpWoleO_mtb9bO4j5Q2IfrzVFByHlLV5wQ_dycqZFi4SqdaXoNwihxFJKKMfVXj7YwHjKA4kEAljBM5zdYDUEqNSGS9JNDlvi4JrcJTCG-UH8QLH4bKURy0iDmAhKt5grDc0SycdNrdPrDdvvvXKWaJST9vsBCvuKlTx24Zq8S9bjceGSuUZmDUeJCvhJ6af877_WwJ-E00oMltCpoctReseDMsDBY31JkTctvBOrS9tKAW_83U3wa_SnnxWiXwxfx3Tdf5YzLG3O_8zX7or2rucHX_fNFJcVfs1evHf_8W7sRCR-XsKzZ"
@@ -132,6 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     
+
+    
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
            if let url = userActivity.webpageURL {
@@ -184,6 +212,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         {
             let uDID = KeyConstant.deviceUUID
             KeyConstant.user_Default.set(uDID, forKey: KeyConstant.kUserSessionTempId)
+           // KeyConstant.user_Default.set("", forKey: KeyConstant.kuserId)
+
             return String(uDID)
 
         }
@@ -422,6 +452,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         
     }
 }
+
+extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+      print("Firebase registration token: \(fcmToken)")
+
+      let dataDict:[String: String] = ["token": fcmToken]
+      NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        
+      //  self.xd.saveSetting(name: "FCMToken", value: fcmToken)
+        
+      // TODO: If necessary send token to application server.
+      // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    
+    
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        Messaging.messaging().apnsToken = deviceToken as Data
+    }
+    
+    
+    
+    
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+//      // If you are receiving a notification message while your app is in the background,
+//      // this callback will not be fired till the user taps on the notification launching the application.
+//      // TODO: Handle data of notification
+//
+//      // With swizzling disabled you must let Messaging know about the message, for Analytics
+//      // Messaging.messaging().appDidReceiveMessage(userInfo)
+//
+//      // Print message ID.
+//      if let messageID = userInfo[gcmMessageIDKey] {
+//        print("Message ID: \(messageID)")
+//      }
+//
+//      // Print full message.
+//      print(userInfo)
+//    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+      // If you are receiving a notification message while your app is in the background,
+      // this callback will not be fired till the user taps on the notification launching the application.
+      // TODO: Handle data of notification
+
+      // With swizzling disabled you must let Messaging know about the message, for Analytics
+      // Messaging.messaging().appDidReceiveMessage(userInfo)
+
+      // Print message ID.
+      if let messageID = userInfo[gcmMessageIDKey] {
+        print("Message ID: \(messageID)")
+      }
+
+      // Print full message.
+      print(userInfo)
+
+      completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    // This method will be called when app received push notifications in foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+}
+
+
 
 
 extension AppDelegate{
