@@ -47,7 +47,6 @@ class PaymentOptionVC: UIViewController {
     var selectedPaymentMethodId:Int?
     var paymentMethods = [MFPaymentMethod]()
     var selectedIndex:Int?
-    var headerIndex:Int?
     var indexPth:IndexPath?
 //    let headers = [
 //        "authorization": "Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ",
@@ -385,131 +384,21 @@ class PaymentOptionVC: UIViewController {
         
         let optionValue = KeyConstant.user_Default.value(forKey: "option") as! String
         var param:[String:String] = ["user_id":user_id,"option":optionValue,"address_id":(dicSelectedAddress["id"]?.string)!,"cart_id":cartIds,"gift_id":giftId,"delivery_charge":strDCharge,"sub_total":subTotalTemp,"total_order_price":grandTotalTemp,"current_currency":self.currency]
-        if self.headerIndex != nil{
+            
+        
+
+        if let index = self.selectedIndex{
+            if self.paymentOd[index].name?.lowercased() == "CASH ON DELIVERY".lowercased(){
+                       param["payment_status"] = "pending"
+                                  param["payment_mode_id"] = paymentOd[index].id
+                                  self.makeCODPayment(param: param)
+                   }else{
+                       param["payment_mode_id"] = "\(self.selectedMethod ?? "")"
+                       self.paymentFatoorahApiCall(parms: param)
+                   }
+        }
        
-
-       
-//            params.put("user_id", sessionManager.getUserId());
-//                           params.put("address_id", address_id);
-//                           params.put("cart_id", cart_id);
-//                           params.put("gift_id", giftId);
-//                           params.put("payment_mode_id", paymentModeid);
-//                           params.put("delivery_charge", shippingCharge);
-//                           params.put("sub_total", sub_total);
-//                           params.put("total_order_price", "" + grand_total);
-//                           params.put("current_currency", sessionManager.getCurrencyCode());
-//                           params.put("tap_id", tap_id);
-        //,"address_id":(dicSelectedAddress["id"]?.string)!
-         
             
-        if(promoDetails.count > 0)
-        {
-            let replacingCurrent = param.merging(promoDetails) {
-                (_, new) in new
-
-            }
-            param = replacingCurrent
-        }
-            
-        if(redeemPointsApplied.count > 0)
-        {
-            let replacingCurrentRedeem = param.merging(redeemPointsApplied) {
-                (_, new) in new
-
-            }
-            param = replacingCurrentRedeem
-        }
-        print("payment parmaeter: \(param)")
-
-        if(grandTotal <= 0.0)
-        {
-            param["payment_status"] = "free"
-            param["payment_mode_id"] = paymentOd[0].id
-            self.makeCODPayment(param: param)
-        }
-        else
-        {
-        if(self.arrayData.count > 0)
-        {
-//            if(self.arrayTempData.contains(1) == true)
-//            {
-//
-//
-//                for ind in 0..<arrayData.count
-//                {
-//                    if(self.arrayTempData[ind] == 1)
-//                    {
-//                        param["payment_mode_id"] = arrayData[ind]["id"].string!
-//
-//
-//                        if(arrayData[ind]["name"].string?.uppercased() == "TAP")
-//                        {
-//                            // KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: "Under development")
-//
-//                            self.makeTapPayment(sourceType: "src_all", param: param)
-//                            return
-//                        }
-//                        else if(arrayData[ind]["name"].string?.uppercased() == "VISA/MASTER")
-//                        {
-//                            self.makeTapPayment(sourceType: "src_card", param: param)
-//                            return
-//                        }
-//                        else if(arrayData[ind]["name"].string?.uppercased() == "KNET")
-//                        {
-//                            self.makeTapPayment(sourceType: "src_kw.knet", param: param)
-//                            return
-//                        }
-//                        else if(arrayData[ind]["name"].string?.uppercased() == "CASH ON DELIVERY") || (arrayData[ind]["name"].string?.uppercased() == "PAYMENT VIA OFFLINE LINK")
-//                        {
-//
-//                            //self.paymentFatoorahApiCall()
-//                            param["payment_status"] = "pending"
-//                            self.makeCODPayment(param: param)
-//                            return
-//                        }
-//                        else
-//                        {
-//                           // KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: "Under development")
-//                            self.paymentFatoorahApiCall()
-//                            return
-//
-//                        }
-//
-//
-//
-//                    }
-//                }
-//
-//            }
-//            KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG231", comment: ""))
-            
-            
-            param["payment_status"] = "pending"
-            param["payment_mode_id"] = paymentOd[0].id
-            self.makeCODPayment(param: param)
-
-        }
-        else
-        {
-            if(grandTotal <= 0.0)
-            {
-                param["payment_status"] = "free"
-                param["payment_mode_id"] = paymentOd[0].id
-                self.makeCODPayment(param: param)
-            }
-            else
-            {
-                self.setAlertSomeThingWentWrong()
-
-            }
-        }
-        }
-    }
-        else{
-            
-            param["payment_mode_id"] = "\(self.selectedMethod ?? "")"
-            self.paymentFatoorahApiCall(parms: param)
-        }
         
         
     }
@@ -593,7 +482,7 @@ class PaymentOptionVC: UIViewController {
     @IBAction func buttonPayNow(_ sender: Any) {
         
      
-        if self.selectedIndex != nil || self.headerIndex != nil{
+        if self.selectedIndex != nil{
             self.recheckCartItemes()
         }else{
             KeyConstant.sharedAppDelegate.showAlertView(vc: self,titleString:NSLocalizedString("MSG31", comment: ""), messageString: NSLocalizedString("MSG231", comment: ""))
@@ -1067,26 +956,27 @@ class PaymentOptionVC: UIViewController {
 extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDelegate
 {
     func radioBtnclicked(indexPth: IndexPath) {
-                if indexPth.section == 0{
-                    self.headerIndex = indexPth.row
-            self.selectedIndex = nil
 
-        }else{
             self.selectedIndex = indexPth.row
-            self.headerIndex = nil
-        }
         if self.selectedIndex != nil{
             
-            let methodId = self.paymentMethods[indexPth.row].paymentMethodId
-            for i in paymentOd {
-                if self.paymentMethods[indexPth.row].paymentMethodAr == i.name_ar {
-                    self.selectedMethod = i.id
+            var methodId:Int?
+//            for i in paymentOd {
+//                if self.paymentMethods[indexPth.row].paymentMethodEn?.lowercased() == i.name?.lowercased() {
+//                    self.selectedMethod = i.id
+//            }
+            self.selectedMethod = self.paymentOd[indexPth.row].id
+            
+//        }
+            
+            
+            for paymentId in 0..<self.paymentMethods.count{
+                if self.paymentOd[indexPth.row].name?.lowercased() ==  self.paymentMethods[paymentId].paymentMethodEn?.lowercased(){
+                    methodId = self.paymentMethods[paymentId].paymentMethodId
+                }
             }
-//            self.selectedMethod = self.paymentMethods[indexPth.row].paymentMethodAr
-            
-        }
-            
             selectedPaymentMethodId = methodId
+            
         }
         
         self.tableView.reloadData()
@@ -1094,16 +984,12 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
-            return 1
-        }else{
-            return self.paymentMethods.count
-        }
-        //arrayData.count
+
+        return self.paymentOd.count
         
     }
     
@@ -1113,73 +999,37 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentOptionTVCell") as! PaymentOptionTVCell
-        //arrayData[indexPath.row]["name"].string
-        
-        if indexPath.section == 0{
-            //http://139.59.93.33/uploads/logo/cash.png
-                    if(HelperArabic().isArabicLanguage())
-                    {
-            //            if let title_ar = self.arrayData[indexPath.row]["name_ar"].string
-            //            {
-            //                if(title_ar.count > 0)
-            //                {
-            //                cell.labelTitle.text = title_ar
-            //                }
-            //            }
-                      cell.labelTitle.text = "CASH ON DELIVERY"
-                    }else{
-                      cell.labelTitle.text = "CASH ON DELIVERY"
-                    }
-            
-            
-                    let strUrl = "http://139.59.93.33/uploads/logo/cash.png"
-                    let urlString = strUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    
-                    
-                    cell.imagePaytype.kf.setImage(with: URL(string: urlString!)!, placeholder: UIImage.init(named: "noImage"), options: [.transition(.fade(1))], progressBlock: nil, completionHandler: { (downloadImage, error, cacheType, url) in
-                        if(downloadImage != nil)
-                        {
-                            cell.imagePaytype.image = downloadImage!
-                        }
-                    })
-           
-            
-            
-        }else{
+
                     if(HelperArabic().isArabicLanguage())
                     {
          
-                      cell.labelTitle.text = self.paymentMethods[indexPath.row].paymentMethodAr
+                      cell.labelTitle.text = self.paymentOd[indexPath.row].name_ar
                     }else{
-                        cell.labelTitle.text = self.paymentMethods[indexPath.row].paymentMethodEn
+                        cell.labelTitle.text = self.paymentOd[indexPath.row].name
                     }
             
-            if let strUrl = self.paymentMethods[indexPath.row].imageUrl
-            {
-                if(strUrl.count > 0)
-                {
-                    let urlString = strUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                    
-                    
-                    cell.imagePaytype.kf.setImage(with: URL(string: urlString!)!, placeholder: UIImage.init(named: "noImage"), options: [.transition(.fade(1))], progressBlock: nil, completionHandler: { (downloadImage, error, cacheType, url) in
-                        if(downloadImage != nil)
-                        {
-                            cell.imagePaytype.image = downloadImage!
-                        }
-                    })
-                }
-                else
-                {
-                    cell.imagePaytype.image = UIImage(named: "noImage")
-                    
-                }
-            }
-            else
-            {
-                cell.imagePaytype.image = UIImage(named: "noImage")
-                
-            }
-        }
+
+            
+            if let logo = self.paymentOd[indexPath.row].logo
+                       {
+                          let urlStr = "http://139.59.93.33/uploads/logo/"+logo
+                               let urlString = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                               
+                               
+                               cell.imagePaytype.kf.setImage(with: URL(string: urlString!)!, placeholder: UIImage.init(named: "noImage"), options: [.transition(.fade(1))], progressBlock: nil, completionHandler: { (downloadImage, error, cacheType, url) in
+                                   if(downloadImage != nil)
+                                   {
+                                       cell.imagePaytype.image = downloadImage!
+                                   }
+                               })
+                       }
+                       else
+                       {
+                           cell.imagePaytype.image = UIImage(named: "noImage")
+                           
+                       }
+            
+           
 
         
         cell.delegate = self
@@ -1188,18 +1038,18 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
        
        // cell.buttonSelection.addTarget(self, action: #selector(buttonSelection), for: .touchUpInside)
         
-        if indexPath.section == 0{
-            if(indexPath.row == headerIndex)
-            {
-                cell.buttonSelection.setImage(UIImage(named: "slect_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                cell.buttonSelection.tintColor = .white//AppColors.SelcetedColor
-            }
-            else
-            {
-                cell.buttonSelection.setImage(UIImage(named: "de_select_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                cell.buttonSelection.tintColor = .white//AppColors.SelcetedColor
-            }
-        }else{
+//        if indexPath.section == 0{
+//            if(indexPath.row == headerIndex)
+//            {
+//                cell.buttonSelection.setImage(UIImage(named: "slect_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//                cell.buttonSelection.tintColor = .white//AppColors.SelcetedColor
+//            }
+//            else
+//            {
+//                cell.buttonSelection.setImage(UIImage(named: "de_select_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
+//                cell.buttonSelection.tintColor = .white//AppColors.SelcetedColor
+//            }
+//        }else{
             if indexPath.row == selectedIndex
             {
                 cell.buttonSelection.setImage(UIImage(named: "slect_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -1210,7 +1060,7 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
                 cell.buttonSelection.setImage(UIImage(named: "de_select_100x100")?.withRenderingMode(.alwaysTemplate), for: .normal)
                 cell.buttonSelection.tintColor = .white//AppColors.SelcetedColor
             }
-        }
+       // }
         
         
         
@@ -1223,17 +1073,20 @@ extension PaymentOptionVC:UITableViewDelegate, UITableViewDataSource,radioBtnDel
     
     @objc func buttonSelection(sender:UIButton){
         
-        if self.indexPth?.section == 0{
-            self.headerIndex = sender.tag
-            self.selectedIndex = nil
-
-        }else{
+        
             self.selectedIndex = sender.tag
-            self.headerIndex = nil
-        }
         if self.selectedIndex != nil{
             
-            let methodId = self.paymentMethods[sender.tag].paymentMethodId
+            var methodId:Int?
+            
+            for paymentId in 0..<self.paymentMethods.count{
+                if self.paymentOd[sender.tag].name?.lowercased() == self.paymentMethods[paymentId].paymentMethodEn?.lowercased(){
+                    methodId = self.paymentMethods[paymentId].paymentMethodId
+                }
+            }
+            
+            
+            
             selectedPaymentMethodId = methodId
         }
         

@@ -83,7 +83,8 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     @IBOutlet weak var PaciLbl: PaddingLabel!
     
     @IBOutlet weak var commentsLbl: PaddingLabel!
-    
+    @IBOutlet weak var shippingAddrHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shippingAddrView: UIView!
     
     @IBOutlet weak var buttonSave: UIButton!
     let locationManager = CLLocationManager()
@@ -92,10 +93,21 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     var locationName = ""
     var dicEditData = [String:JSON]()
     lazy var geocoder = CLGeocoder()
-    
+    var isFromEditAddress = false
     override func viewDidLoad() {
         super.viewDidLoad()
         //tableView.isHidden = true
+        
+        
+         if self.isFromEditAddress{
+                   self.shippingAddrView.isHidden = true
+                   self.shippingAddrHeightConstraint.constant = 0
+                   self.checkOutTitleLbl.text = "EDIT DELIVERY ADDRESS"
+               }else{
+                   self.shippingAddrView.isHidden = false
+                   self.shippingAddrHeightConstraint.constant = 48
+                   self.checkOutTitleLbl.text = "CHECKOUT"
+               }
         
        self.labelTitlShareLoca.text = NSLocalizedString("MSG352", comment: "")
         

@@ -28,8 +28,10 @@ class CheckOutVC: UIViewController {
     @IBOutlet weak var backImgView: UIImageView!
     @IBOutlet weak var homeBtn: UIButton!
     
+    @IBOutlet weak var shippingAddrHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var continueToPayBtn: UIButton!
     
+    @IBOutlet weak var shippingAddrView: UIView!
     var user_id = KeyConstant.sharedAppDelegate.getUserId()
     
     
@@ -44,12 +46,25 @@ class CheckOutVC: UIViewController {
     var promoDetails = [String:String]()
     var isFromGuestLogin = Bool()
     
+    var isFromEditAddress = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //tableView.tableFooterView = UIView()
         
-        
+        if self.isFromEditAddress{
+            self.shippingAddrView.isHidden = true
+            self.shippingAddrHeightConstraint.constant = 0
+            self.footerViewTable.isHidden = true
+            self.checkOutTitleLbl.text = "EDIT DELIVERY ADDRESS"
+            self.homeBtn.isHidden = true
+        }else{
+            self.shippingAddrView.isHidden = false
+            self.shippingAddrHeightConstraint.constant = 48
+            self.footerViewTable.isHidden = false
+            self.checkOutTitleLbl.text = "CHECKOUT"
+            self.homeBtn.isHidden = false
+        }
         print(promoDetails, redeemPointsApplied )
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -185,6 +200,7 @@ class CheckOutVC: UIViewController {
     @IBAction func buttonAddAddress(_ sender: Any) {
         
         let objFav = self.storyboard?.instantiateViewController(withIdentifier: "NewAddressVC") as! NewAddressVC
+        objFav.isFromEditAddress = self.isFromEditAddress
         self.present(objFav, animated: false, completion: nil)
         
         
@@ -270,7 +286,11 @@ extension CheckOutVC:UITableViewDelegate, UITableViewDataSource
         cell.buttonEdit.addTarget(self, action: #selector(buttonEdit), for: .touchUpInside)
         cell.buttonCart.addTarget(self, action: #selector(buttonSelect), for: .touchUpInside)
         cell.buttonSelectAddress.addTarget(self, action: #selector(buttonSelect), for: .touchUpInside)
-        
+        if self.isFromEditAddress{
+            cell.buttonCart.isHidden = true
+        }else{
+           cell.buttonCart.isHidden = false
+        }
         
         if let dicData = arrayData[indexPath.row].dictionary
         {
@@ -425,6 +445,7 @@ extension CheckOutVC:UITableViewDelegate, UITableViewDataSource
         if let dicData = arrayData[sender.tag].dictionary
         {
             let objFav = self.storyboard?.instantiateViewController(withIdentifier: "NewAddressVC") as! NewAddressVC
+            objFav.isFromEditAddress = self.isFromEditAddress
             objFav.dicEditData = dicData
             self.present(objFav, animated: false, completion: nil)
         }

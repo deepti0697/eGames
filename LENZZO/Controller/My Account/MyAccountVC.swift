@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class MyAccountVC: UIViewController, UITextFieldDelegate {
     var arrayData = [JSON]()
-    var arrayOptions = [NSLocalizedString("MSG261", comment: ""),NSLocalizedString("MSG368", comment: ""),NSLocalizedString("MSG238", comment: ""),NSLocalizedString("MSG262", comment: ""),NSLocalizedString("MSG263", comment: ""),NSLocalizedString("MSG114", comment: "")]
+    var arrayOptions = [NSLocalizedString("MSG261", comment: ""),NSLocalizedString("MSG368", comment: ""),NSLocalizedString("MSG238", comment: ""),NSLocalizedString("MSG262", comment: ""),NSLocalizedString("EDIT DELIVERY ADDRESS", comment: ""),NSLocalizedString("MSG263", comment: ""),NSLocalizedString("MSG114", comment: "")]
     
     @IBOutlet weak var headerTopView: UIView!
     @IBOutlet weak var viewCall: UIView!
@@ -436,7 +436,7 @@ extension MyAccountVC: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if(indexPath.row == 4)
+        if(indexPath.row == 6)
         {
             SignupViewModel().logout(vc: self)
             return
@@ -476,11 +476,19 @@ extension MyAccountVC: UITableViewDelegate, UITableViewDataSource
                 self.present(objFav, animated: false, completion: nil)
             }
             break
-        case 4:
+            case 4:
+            DispatchQueue.main.async {
+                
+                let objFav = self.storyboard?.instantiateViewController(withIdentifier: "CheckOutVC") as! CheckOutVC
+                objFav.isFromEditAddress = true
+                self.present(objFav, animated: false, completion: nil)
+            }
+            break
+        case 5:
             let objFav = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
             self.present(objFav, animated: false, completion: nil)
             break
-        case 5:
+        case 6:
             SignupViewModel().logout(vc: self)
             
             break

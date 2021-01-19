@@ -408,14 +408,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     @IBAction func butttonBack(_ sender: Any) {
         
-        if let strIsFromMyAccountTab =  KeyConstant.user_Default.value(forKey:KeyConstant.kSelectedTabBarIndex) as? String
-        {
-            if(strIsFromMyAccountTab == "3")
+//        if let strIsFromMyAccountTab =  KeyConstant.user_Default.value(forKey:KeyConstant.kSelectedTabBarIndex) as? String
+//        {
+            if(self.tabBarController?.selectedIndex == 4)
             {
                 KeyConstant.sharedAppDelegate.setRoot()
                 return
             }
-        }
+        //}
         
         
         self.dismiss(animated: false, completion:

@@ -83,50 +83,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, OSPermissionObserver, OSS
             print("Received Notification: \(String(describing: notification!.payload.notificationID))")
         }
         
-        let notificationOpenedBlock: OSHandleNotificationActionBlock = { result in
-            // This block gets called when the user reacts to a notification received
-            self.updateNotification()
-            let payload: OSNotificationPayload = result!.notification.payload
-            if payload.additionalData != nil {
-                let additionalData = payload.additionalData
-                print("additionalData = \(String(describing: additionalData))")
-                if additionalData?["notification"] != nil {
-                    
-                    if(additionalData?["notification"] as? String == "new_offer")
-                    {
-                        KeyConstant.user_Default.set(additionalData?["offer_id"] as? String ?? "", forKey: KeyConstant.kpush_notification_offerid)
-                        KeyConstant.sharedAppDelegate.setRoot()
-
-                       return
-                    }
-                    else if(additionalData?["notification"] as? String == "order")
-                    {
-                        if let userid = KeyConstant.user_Default.value(forKey: KeyConstant.kuserId) as? String
-                        {
-                            KeyConstant.user_Default.set("yes", forKey: KeyConstant.push_notification_myorder)
-                            KeyConstant.sharedAppDelegate.setRoot()
-                          
-                            return
-                        }
-                    }
-                }
-            }
-            
-            //KeyConstant.sharedAppDelegate.setRoot()
-           // self.setRoot()
-            
-            
-        }
+//        let notificationOpenedBlock: OSHandleNotificationActionBlock = { result in
+//            // This block gets called when the user reacts to a notification received
+//            self.updateNotification()
+//            let payload: OSNotificationPayload = result!.notification.payload
+//            if payload.additionalData != nil {
+//                let additionalData = payload.additionalData
+//                print("additionalData = \(String(describing: additionalData))")
+//                if additionalData?["notification"] != nil {
+//
+//                    if(additionalData?["notification"] as? String == "new_offer")
+//                    {
+//                        KeyConstant.user_Default.set(additionalData?["offer_id"] as? String ?? "", forKey: KeyConstant.kpush_notification_offerid)
+//                        KeyConstant.sharedAppDelegate.setRoot()
+//
+//                       return
+//                    }
+//                    else if(additionalData?["notification"] as? String == "order")
+//                    {
+//                        if let userid = KeyConstant.user_Default.value(forKey: KeyConstant.kuserId) as? String
+//                        {
+//                            KeyConstant.user_Default.set("yes", forKey: KeyConstant.push_notification_myorder)
+//                            KeyConstant.sharedAppDelegate.setRoot()
+//
+//                            return
+//                        }
+//                    }
+//                }
+//            }
+//
+//            //KeyConstant.sharedAppDelegate.setRoot()
+//           // self.setRoot()
+//
+//
+//        }
         
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.0aed61eb-fd91-45a7-ba20-5fde2cc2c1d4
         //26716a06-ca71-479c-8331-b247dda4e98c old and lenzzo appid
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "0aed61eb-fd91-45a7-ba20-5fde2cc2c1d4",
-                                        handleNotificationReceived: notificationReceivedBlock,
-                                        handleNotificationAction: notificationOpenedBlock ,
-                                        settings: onesignalInitSettings)
+//        OneSignal.initWithLaunchOptions(launchOptions,
+//                                        appId: "0aed61eb-fd91-45a7-ba20-5fde2cc2c1d4",
+//                                        handleNotificationReceived: notificationReceivedBlock,
+//                                        handleNotificationAction: notificationOpenedBlock ,
+//                                        settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
@@ -459,9 +459,9 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
 
       let dataDict:[String: String] = ["token": fcmToken]
       NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        
+        KeyConstant.user_Default.set(fcmToken, forKey: KeyConstant.kDeviceToken)
+        self.guestDeviceTokenUpdate()
       //  self.xd.saveSetting(name: "FCMToken", value: fcmToken)
-        
       // TODO: If necessary send token to application server.
       // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
@@ -500,7 +500,7 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
       // TODO: Handle data of notification
 
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-      // Messaging.messaging().appDidReceiveMessage(userInfo)
+       Messaging.messaging().appDidReceiveMessage(userInfo)
 
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
@@ -509,6 +509,22 @@ extension AppDelegate:MessagingDelegate,UNUserNotificationCenterDelegate{
 
       // Print full message.
       print(userInfo)
+        
+        
+                if application.applicationState == .active
+                {
+                    let userAPS = userInfo["aps"] as? [String:AnyObject]
+                    if let userMessage = userAPS?["alert"] as? [String:AnyObject]
+                    {
+                        
+//                        print(userMessage["title"])
+//                        print(userMessage["body"])
+                       
+                    }
+                }
+                else{
+                    print("not active state while recieving notification")
+        }
 
       completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -628,7 +644,11 @@ extension AppDelegate{
 
             
         })
+        }else{
+            self.updateNotification()
         }
+     
+        
         
     }
 }
@@ -651,7 +671,7 @@ extension AppDelegate
                 print(" registration token: \(stateChanges.to.userId)")
                 
                 KeyConstant.user_Default.set(stateChanges.to.userId, forKey: KeyConstant.kDeviceToken)
-                self.guestDeviceTokenUpdate()
+              //  self.guestDeviceTokenUpdate()
                 
                 
                 

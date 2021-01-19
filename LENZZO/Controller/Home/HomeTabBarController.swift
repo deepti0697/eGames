@@ -33,8 +33,16 @@ class HomeTabBarController: UITabBarController {
         
         self.setViewControllerForNormalUser()
         setupMiddleButton()
-        
-        
+        moreNavigationController.navigationBar.isHidden = true
+        if let moreTableView = moreNavigationController.topViewController?.view as? UITableView {
+            moreTableView.tintColor = .white
+            for cell in moreTableView.visibleCells{
+                cell.textLabel?.textColor = .white
+                //cell.contentView.backgroundColor = .clear
+                cell.backgroundColor = .clear
+            }
+            moreTableView.backgroundColor = AppColors.themeColor
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -114,6 +122,7 @@ class HomeTabBarController: UITabBarController {
         
         self.setViewC(vC: OffersHomeVC(), imageName: "icon", title:  NSLocalizedString("MSG253", comment: ""), colorVC: AppColors.themeColor, withIdentifie: "OffersHomeVC")
         
+        self.setViewC(vC: MyCartVC(), imageName: "cart", title:  NSLocalizedString("Cart", comment: ""), colorVC: AppColors.themeColor, withIdentifie: "MyCartVC")
         
         if let strUserID = KeyConstant.user_Default.value(forKey: KeyConstant.kuserId) as? String
         {
@@ -167,6 +176,7 @@ class HomeTabBarController: UITabBarController {
         let objJob = self.storyboard?.instantiateViewController(withIdentifier: withIdentifie)
         objJob?.tabBarItem.image = UIImage(named: imageName)
         objJob?.title = title
+       
         let navBar = UINavigationController(rootViewController: objJob!)
         navBar.isNavigationBarHidden = true
         controllers.append(objJob!)

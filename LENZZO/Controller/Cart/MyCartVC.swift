@@ -453,6 +453,15 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
                 return
             }
             
+            
+            if (totalCount as NSString).integerValue > 0{
+                if let tabItems = self.tabBarController?.tabBar.items {
+                    // In this case we want to modify the badge number of the forth tab:
+                    let tabItem = tabItems[3]
+                    tabItem.badgeValue = totalCount
+                }
+            }
+            
             self.arrayData = result
             if(self.arrayData.count == 0)
             {
@@ -1064,6 +1073,10 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
         if(self.navigationController != nil)
         {
             self.navigationController?.popViewController(animated: true)
+            
+            if self.tabBarController?.selectedIndex == 3{
+                self.tabBarController?.selectedIndex = 0
+            }
         }
         else
         {

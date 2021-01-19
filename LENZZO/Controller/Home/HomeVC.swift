@@ -141,6 +141,8 @@ class HomeVC: UIViewController {
             {
                 print(result.count)
                 self.labelCountCart.text = totalCount
+                
+               
             }
             
             
@@ -178,6 +180,20 @@ class HomeVC: UIViewController {
             {
                 print(result.count)
                 self.labelCountCart.text = totalCount
+                if (totalCount as NSString).integerValue > 0{
+                                   if let tabItems = self.tabBarController?.tabBar.items {
+                                       // In this case we want to modify the badge number of the forth tab:
+                                       let tabItem = tabItems[3]
+                                       tabItem.badgeValue = totalCount
+                                   }
+                               }
+                               else{
+                                   if let tabItems = self.tabBarController?.tabBar.items {
+                                                         // In this case we want to modify the badge number of the forth tab:
+                                                         let tabItem = tabItems[3]
+                                                         tabItem.badgeValue = nil
+                                                     }
+                               }
             }})
         
        // self.view.bringSubviewToFront(self.whatsappContainerView)
@@ -202,6 +218,23 @@ class HomeVC: UIViewController {
     
 
     
+    @IBAction func websiteLinkAction(_ sender: UIButton) {
+        
+        //        if let url = URL(string: "http://www.kdakw.com/") {
+        //            UIApplication.shared.open(url)
+        //        }
+        
+        
+        if let url = URL(string: "http://www.kdakw.com/") {
+            if UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+    }
     
     @IBAction func buttonWhatsapp(_ sender: Any) {
         
