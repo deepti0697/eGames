@@ -16,6 +16,7 @@ class CheckouttVCell: UITableViewCell {
     @IBOutlet weak var buttonEdit: UIButton!
     @IBOutlet weak var buttonDelete: UIButton!
     
+    @IBOutlet weak var addressTypeLbl: UILabel!
     @IBOutlet weak var pencilImgView: UIImageView!
     
     @IBOutlet weak var deleteImgView: UIImageView!

@@ -296,6 +296,7 @@ extension CheckOutVC:UITableViewDelegate, UITableViewDataSource
         {
             cell.labelInfo.attributedText = self.getAddress(dicData: dicData)
             cell.labelInfo.setLineSpacing(lineSpacing: 3.0)
+            cell.addressTypeLbl.text = "ADDRESS TYPE: \(dicData["address_type"]?.string ?? "")"
         }
         
         if HelperArabic().isArabicLanguage(){

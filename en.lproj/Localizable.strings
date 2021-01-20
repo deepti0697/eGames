@@ -419,7 +419,7 @@
 "MSG443" = "CREATE ACCOUNT";
 "MSG444" = "Search Products";
 "MSG445" = "Choose Your Language";
-"MSG446" = "Products you have in cart does not required delivery, codes can be shared on whatsapp";
-"MSG447" = "Share code on whatsapp";
+"MSG446" = "Product you have in cart does not require delivery, codes can be shared digitally via WhatsApp/Email/Notification";
+"MSG447" = "Share code Digitally";
 "MSG448" = "Please deliver it";
 "MSG449" = "RELATED PRODUCTS";

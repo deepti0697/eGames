@@ -97,7 +97,7 @@ class LoginViewModel
                                 }
                                 else
                                 {
-                                    if(strIsFromMyAccountTab == "3")
+                                    if(vc.tabBarController?.selectedIndex == 4)
                                     {
                                         KeyConstant.sharedAppDelegate.setRoot()
                                         return

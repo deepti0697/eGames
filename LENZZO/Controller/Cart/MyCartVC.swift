@@ -460,6 +460,12 @@ class MyCartVC: UIViewController,ReloadDataDelegate,UIGestureRecognizerDelegate 
                     let tabItem = tabItems[3]
                     tabItem.badgeValue = totalCount
                 }
+            }else{
+                if let tabItems = self.tabBarController?.tabBar.items {
+                                   // In this case we want to modify the badge number of the forth tab:
+                                   let tabItem = tabItems[3]
+                                   tabItem.badgeValue = nil
+                               }
             }
             
             self.arrayData = result

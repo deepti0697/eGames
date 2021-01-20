@@ -1537,9 +1537,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LENZZO/LENZZO.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1580,7 +1580,7 @@
 				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames;
 				PRODUCT_NAME = "E-Games Store";
-				PROVISIONING_PROFILE_SPECIFIER = EgamesLiveProvisioningProfile10Dec;
+				PROVISIONING_PROFILE_SPECIFIER = EgamesProProfileDev;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1592,9 +1592,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LENZZO/LENZZO.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = VD9FRH6Y57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1635,7 +1635,7 @@
 				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rg.EGames;
 				PRODUCT_NAME = "E-Games Store";
-				PROVISIONING_PROFILE_SPECIFIER = EgamesLiveProvisioningProfile10Dec;
+				PROVISIONING_PROFILE_SPECIFIER = EgamesProProfileDev;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

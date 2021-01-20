@@ -15,6 +15,14 @@ import CoreLocation
 class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLocationManagerDelegate {
     var user_id = KeyConstant.sharedAppDelegate.getUserId()
 
+    @IBOutlet weak var otherLbl: UILabel!
+    @IBOutlet weak var otherRadioBtn: UIButton!
+    @IBOutlet weak var officeLbl: UILabel!
+    @IBOutlet weak var officeRadioBtn: UIButton!
+    @IBOutlet weak var homeRadioBtn: UIButton!
+    @IBOutlet weak var homeLbl: UILabel!
+    @IBOutlet weak var addrTypeAstricLbl: UILabel!
+    @IBOutlet weak var addressTypeTitleLbl: PaddingLabel!
     @IBOutlet weak var backImgView: UIImageView!
     @IBOutlet weak var imageMapIcon: UIImageView!
     @IBOutlet weak var imageBubbleIcon: UIImageView!
@@ -94,6 +102,8 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     var dicEditData = [String:JSON]()
     lazy var geocoder = CLGeocoder()
     var isFromEditAddress = false
+    var selectedAddrType = "Home"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //tableView.isHidden = true
@@ -156,6 +166,11 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
         else
         {
             buttonSave.setTitle(NSLocalizedString("MSG212", comment: ""), for: .normal)
+            
+            self.homeRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+            self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.selectedAddrType = "Home"
         }
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(rightSwip))
@@ -384,6 +399,28 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     self.textFieldPhoneNumber.text = dicEditData["phone_no"]?.string ?? ""
     self.textFieldPACI.text = dicEditData["paci_number"]?.string ?? ""
     
+    
+    if let addressType = dicEditData["address_type"]?.string{
+        if addressType.lowercased() == "Home".lowercased(){
+            self.selectedAddrType = "Home"
+            self.homeRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+            self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.otherRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        }else if addressType.lowercased() == "Office".lowercased(){
+            self.selectedAddrType = "Office"
+            self.homeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.officeRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+            self.otherRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        }else{
+            self.selectedAddrType = "Other"
+            self.homeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+            self.otherRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+        }
+    }
+    
+
+//    self.selectedAddrType = "Home"
     if let comments = dicEditData["comments"]?.string
     {
         if(comments.count > 0)
@@ -451,6 +488,36 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    
+    @IBAction func homeAddrBtnAction(_ sender: Any) {
+        
+        self.homeRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+        self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.otherRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.selectedAddrType = "Home"
+    }
+    
+    @IBAction func officeAddrBtnAction(_ sender: Any) {
+        
+        
+        self.homeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.officeRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+        self.otherRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.selectedAddrType = "Office"
+    }
+    
+    
+    @IBAction func otherAddrBtnAction(_ sender: Any) {
+        
+        self.homeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.officeRadioBtn.setImage(UIImage(named: "radio"), for: .normal)
+        self.otherRadioBtn.setImage(UIImage(named: "radio_fill"), for: .normal)
+        self.selectedAddrType = "Other"
+    }
+    
+    
+    
     @IBAction func buttonBackAction(_ sender: Any) {
         //self.dismiss(animated: false, completion: nil)
         self.dismiss(animated: false, completion: nil)
@@ -669,7 +736,7 @@ class NewAddressVC: UIViewController,UITextFieldDelegate,UITextViewDelegate,CLLo
             let cLocation = self.currentLocationName.text ?? ""
             let paci = self.textFieldPACI.text ?? ""
 
-            var params = ["full_name":textFieldName.text ?? "","area":textFieldArea.text ?? "","block":textFieldBlock.text ?? "","street":textFieldStreet.text ?? "","avenue":textFieldAvenue.text ?? "","house_no":textFieldHouse.text ?? "","floor_no":textFieldFloorNum.text ?? "","flat_no":textFieldFlatNum.text ?? "","phone_no":phoneNumber,"comments": comments,"latitude":String(format:"%.2f",locationLati), "longitude":String(format:"%.2f",locationLon),"user_id":user_id,"currrent_location":cLocation,"paci_number":paci]
+        var params = ["full_name":textFieldName.text ?? "","area":textFieldArea.text ?? "","block":textFieldBlock.text ?? "","street":textFieldStreet.text ?? "","avenue":textFieldAvenue.text ?? "","house_no":textFieldHouse.text ?? "","floor_no":textFieldFloorNum.text ?? "","flat_no":textFieldFlatNum.text ?? "","phone_no":phoneNumber,"comments": comments,"latitude":String(format:"%.2f",locationLati), "longitude":String(format:"%.2f",locationLon),"user_id":user_id,"currrent_location":cLocation,"paci_number":paci,"address_type":self.selectedAddrType]
             
             //"currentLocation": self.currentLocationName.text ?? ""
             

@@ -236,6 +236,13 @@ class HomeVC: UIViewController {
         }
     }
     
+    
+    @IBAction func searchBarBtnAction(_ sender: Any) {
+        
+        KeyConstant.sharedAppDelegate.showSearchScreen(vc: self)
+    }
+    
+    
     @IBAction func buttonWhatsapp(_ sender: Any) {
         
         if(strWhatsappNumber.count > 0)
