@@ -290,7 +290,7 @@ class MyAccountVC: UIViewController, UITextFieldDelegate {
                 }
                 
                 
-                self.labelLoyaltyPoints.text = String(format:"\(NSLocalizedString("MSG394", comment: ""))",totalPoints,priceTemp,currentCurrency)
+                self.labelLoyaltyPoints.text = "\(NSLocalizedString("MSG394", comment: "")) " + totalPoints + " " + "(\(priceTemp) \(currentCurrency))" + " " + NSLocalizedString("MSG371", comment: "")
                 
             }
             

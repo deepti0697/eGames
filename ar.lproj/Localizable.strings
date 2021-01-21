@@ -355,7 +355,7 @@
 
 
 "MSG393" = "احصل على٪ @ نقاط الولاء بعد الدفع";
-"MSG394" = "لديك٪ @ (٪ @٪ @) من نقاط الولاء";
+"MSG394" = "عندك";
 "MSG395" = "قيد الإنتظار";
 "MSG396" = "فاشلة";
 
@@ -421,7 +421,7 @@
 "MSG443" = "إصنع حساب";
 "MSG444" = "البحث عن المنتجات";
 "MSG445" = "اختر لغتك";
-"MSG446" = "Product you have in cart does not require delivery, codes can be shared digitally via WhatsApp/Email/Notification";
-"MSG447" = "Share code Digitally";
-"MSG448" = "Please deliver it";
+"MSG446" = "لا يتطلب المنتج الموجود في عربة التسوق التسليم ، ويمكن مشاركة الرموز رقميًا عبر WhatsApp / البريد الإلكتروني / الإشعار";
+"MSG447" = "رمز المشاركة رقميًا";
+"MSG448" = "يرجى تسليمها";
 "MSG449" = "منتجات ذات صلة";

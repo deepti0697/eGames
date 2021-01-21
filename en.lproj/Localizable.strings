@@ -356,7 +356,7 @@
 "MSG392" = "Redeemed Points";
 
 "MSG393" = "Get %@ Loyalty points after payment";
-"MSG394" = "You have %@ (%@ %@) Loyalty points";
+"MSG394" = "You have";
 
 "MSG395" = "PENDING";
 "MSG396" = "FAILED";
